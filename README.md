@@ -4,8 +4,7 @@
 
 ## 技术栈
 
-- react
+- React Hooks
 - TypeScript
 - react-router
-- redux
 - styled-components
