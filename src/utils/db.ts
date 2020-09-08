@@ -1,8 +1,8 @@
 export default {
-  set(key: 'records' | 'myOutlayTags' | 'myIncomeTags' | 'MAX_ID', value: string) {
+  set(key: string, value: string) {
     window.localStorage.setItem(key, value)
   },
-  get(key: 'records' | 'myOutlayTags' | 'myIncomeTags' | 'MAX_ID') {
+  get(key: string) {
     const dataString = window.localStorage.getItem(key)
     return dataString ? JSON.parse(dataString) : null
   }

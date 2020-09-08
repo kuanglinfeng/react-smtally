@@ -1,8 +1,14 @@
 import './App.css'
 import React from 'react'
+import Test from './components/Test'
 
 function App() {
-  return <div className="App">hello world</div>
+  return (
+      <div>
+        hello
+         <Test />
+      </div>
+  )
 }
 
 export default App
