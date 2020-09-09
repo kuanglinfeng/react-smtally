@@ -1,6 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink as Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Icon from 'components/Icon'
+import theme from 'theme'
 
 const Nav = styled.nav`
   box-shadow: 0 0 3px rgba(0, 0, 0, .25);
@@ -9,8 +11,23 @@ const Nav = styled.nav`
     display:flex;
     > li {
       width: 33.333333%;
-      padding: 16px;
-      text-align: center;
+      &.add {
+        .icon {fill: ${theme.color};}
+      }
+      > a {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        padding-top: 4px;
+        > .icon {
+         height: 32px; width: 32px;
+        }
+        &.active {
+          > .icon {fill: ${theme.color};}
+        }
+      }
     }
   }
 `
@@ -20,13 +37,22 @@ export default function () {
     <Nav>
       <ul>
         <li>
-          <Link to="/bill">账单</Link>
+          <Link to="/bill">
+            <Icon name="bill" />
+            账单
+          </Link>
+        </li>
+        <li className='add'>
+          <Link to="/add">
+            <Icon name="add" />
+            记一笔
+          </Link>
         </li>
         <li>
-          <Link to="/tally">记一笔</Link>
-        </li>
-        <li>
-          <Link to="/chart">图表</Link>
+          <Link to="/chart">
+            <Icon name="chart" />
+            图表
+          </Link>
         </li>
       </ul>
     </Nav>

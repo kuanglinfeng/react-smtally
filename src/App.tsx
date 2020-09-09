@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import NotFound from 'views/NotFound'
 import Chart from 'views/Chart'
-import Tally from 'views/Tally'
+import Add from 'views/Add'
 import Bill from 'views/Bill'
 import Nav from 'components/Nav'
 
@@ -27,8 +27,8 @@ function App() {
             <Route path="/bill">
               <Bill />
             </Route>
-            <Route path="/tally">
-              <Tally />
+            <Route path="/add">
+              <Add />
             </Route>
             <Route path="/chart">
               <Chart />
