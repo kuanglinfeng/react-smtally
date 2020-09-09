@@ -1,9 +1,12 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 export default function () {
   return (
-    <div>
-      账单页
-    </div>
+    <Layout>
+      <div>
+        账单
+      </div>
+    </Layout>
   )
 }
