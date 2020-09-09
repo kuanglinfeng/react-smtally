@@ -23,13 +23,14 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  selectList: string[]
+  defaultValue?: string
+  values: string[]
   onSelect: (value: string) => void
 }
 
 export default (props: Props) => {
 
-  const [text, setText] = useState('')
+  const [text, setText] = useState(props.defaultValue ? props.defaultValue : props.values[0])
 
   const onSelect = (e: any) => {
     setText(e.target.innerText)
@@ -37,10 +38,10 @@ export default (props: Props) => {
   }
 
   return (
-    <Wrapper onClick={onSelect}>
+    <Wrapper onClick={ onSelect }>
       {
-        props.selectList.map(item => {
-          return <button key={item} className={text === item ? 'active' : ''}>{item}</button>
+        props.values.map(value => {
+          return <button key={ value } className={ text === value ? 'active' : '' }>{ value }</button>
         })
       }
     </Wrapper>

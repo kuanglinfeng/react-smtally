@@ -13,10 +13,10 @@ const Wrapper = styled.div`
   }
 `
 
-export default (props: Props<any>) => {
+export default (props: Props<null> ) => {
   return (
     <Wrapper>
-      {props.children}
+      { props.children }
       <Nav />
     </Wrapper>
   )

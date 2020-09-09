@@ -1,24 +1,21 @@
 import React from 'react'
-import RadioMenu from 'components/RadioMenu'
 import styled from 'styled-components'
+import Header from '../components/add/Header'
 
 const Wrapper = styled.div`
+  border: 1px solid blue;
   height: 100vh;
-  border: 1px solid red;
 `
 
 export default function () {
 
-  const types = ['支出', '收入', '其它']
-
-  const onSelect = (value: string) => {
+  const onRecordTypeSelect = (value: string) => {
     console.log(value)
   }
 
   return (
     <Wrapper>
-      记账页
-      <RadioMenu selectList={types} onSelect={onSelect}/>
+      <Header onSelect={onRecordTypeSelect}/>
     </Wrapper>
   )
 }
