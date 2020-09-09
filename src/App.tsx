@@ -1,27 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from './views/Home'
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import NotFound from './views/NotFound'
 import Chart from './views/Chart'
 import Tally from './views/Tally'
+import Bill from './views/Bill'
+import Nav from './components/Nav'
 
 const Wrapper = styled.div`
-  border: 1px solid red;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+`
+
+const Main = styled.main`
+  flex-grow: 1;
+  overflow: auto;
 `
 
 function App() {
   return (
-    <Wrapper>
-      <Router>
-        <Switch>
-          <Route path="/" component={Home} exact/>
-          <Route path="/tally" component={Tally} exact/>
-          <Route path="/chart" component={Chart} exact/>
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Router>
-    </Wrapper>
+    <Router>
+      <Wrapper>
+        <Main>
+          <Switch>
+            <Route path="/bill">
+              <Bill />
+            </Route>
+            <Route path="/tally">
+              <Tally />
+            </Route>
+            <Route path="/chart">
+              <Chart />
+            </Route>
+            <Redirect from="/" to="bill" exact />
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Main>
+        <Nav />
+      </Wrapper>
+    </Router>
   )
 }
+
 export default App
