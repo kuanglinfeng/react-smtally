@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import NotFound from './views/NotFound'
-import Chart from './views/Chart'
-import Tally from './views/Tally'
-import Bill from './views/Bill'
-import Nav from './components/Nav'
+import NotFound from 'views/NotFound'
+import Chart from 'views/Chart'
+import Tally from 'views/Tally'
+import Bill from 'views/Bill'
+import Nav from 'components/Nav'
 
 const Wrapper = styled.div`
   height: 100vh;
