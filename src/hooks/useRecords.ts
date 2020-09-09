@@ -11,12 +11,14 @@ export default function () {
     const records = getAll()
     return records.filter(record => record.id === id)[0]
   }
+
   function add(record: RecordItem) {
     record.id = createId()
     const records = getAll()
     records.push(record)
     db.set('records', JSON.stringify(records))
   }
+
   function remove(id: string) {
     const records = getAll()
     if (records.length === 0) return 
@@ -25,6 +27,7 @@ export default function () {
     records.splice(index, 1)
     db.set('records', JSON.stringify(records))
   }
+
   function edit(id: string, record: RecordItem) {
     record.id = id
     const records = getAll()
@@ -32,6 +35,6 @@ export default function () {
     records.splice(index, 1, record)
     db.set('records', JSON.stringify(records))
   }
-
+  
   return {get, getAll, add, remove, edit}
 }
