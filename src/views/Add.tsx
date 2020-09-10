@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/add/Header'
+import Keyboard from '../components/Keyboard'
 
 const Wrapper = styled.div`
-  border: 1px solid blue;
   height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 export default function () {
@@ -16,6 +19,7 @@ export default function () {
   return (
     <Wrapper>
       <Header onSelect={onRecordTypeSelect}/>
+      <Keyboard />
     </Wrapper>
   )
 }

@@ -18,8 +18,9 @@ const Header = styled.header`
     padding: 5px;
   }
   > span {
+    display: inline-block;
     color: #fff;
-    padding: 5px;
+    width: 30px;height: 30px;
   }
 `
 
@@ -34,7 +35,7 @@ export default (props: Props) => {
     <Header>
       <Icon name="back" onClick={() => history.goBack()}/>
       <RadioMenu values={['支出', '收入']} onSelect={props.onSelect}/>
-      <span>保存</span>
+      <span />
     </Header>
   )
 }
