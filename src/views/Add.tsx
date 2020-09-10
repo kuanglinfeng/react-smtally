@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/add/Header'
 import Keyboard from '../components/Keyboard'
@@ -13,12 +13,14 @@ const Wrapper = styled.div`
 
 export default function () {
 
+  const [amount, setAmount] = useState('')
+
   const onRecordTypeSelect = (value: string) => {
     console.log(value)
   }
 
   const onRecordAmountChange = (amount: string) => {
-    // console.log(amount)
+    setAmount(amount)
   }
 
   const onRecordAmountSubmit = (amount: number) => {
@@ -32,7 +34,7 @@ export default function () {
   return (
     <Wrapper>
       <Header onSelect={onRecordTypeSelect}/>
-      <AmountShow />
+      <AmountShow amount={amount} />
       <Keyboard onValueChange={onRecordAmountChange} onSubmit={onRecordAmountSubmit} />
     </Wrapper>
   )

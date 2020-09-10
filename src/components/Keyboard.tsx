@@ -78,7 +78,9 @@ export default (props: Props) => {
   const onNumberClick = (e: SyntheticEvent) => {
     const button = e.target as HTMLButtonElement
     const inputValue = button.textContent || '0'
-    if (amount.length === 16) return
+    // 如果已经是个小数了，且小数点后面有两位了，则不允许再叠加数字
+    if (amount.indexOf('.') !== -1 && amount.split('.')[1].length === 2)  return
+    if (amount.length === 12) return
     // 开启计算模式
     if (adding || subtracting) {
       setSecondAmount(secondAmount === '0' ? inputValue : secondAmount + inputValue)
@@ -106,16 +108,20 @@ export default (props: Props) => {
   const onAdd = () => {
     if (amount === '0') return
     if (subtracting) {
-      setAmount(parseFloat(firstAmount) - parseFloat(secondAmount) + '+')
-      setFirstAmount(parseFloat(firstAmount) - parseFloat(secondAmount) + '')
+      let total = parseFloat(firstAmount) - parseFloat(secondAmount)
+      // if (total.toString().length >= 12) total = parseFloat(total.toFixed(2))
+      setAmount( total+ '+')
+      setFirstAmount(total + '')
       setSecondAmount('0')
       setSubtracting(false)
       setAdding(true)
       return
     }
     if (adding) {
-      setAmount(parseFloat(firstAmount) + parseFloat(secondAmount) + '+')
-      setFirstAmount(parseFloat(firstAmount) + parseFloat(secondAmount) + '')
+      let total = parseFloat(firstAmount) + parseFloat(secondAmount)
+      // if (total.toString().length >= 12) total = parseFloat(total.toFixed(2))
+      setAmount( total + '+')
+      setFirstAmount(total + '')
       setSecondAmount('0')
     } else {
       setAdding(true)
@@ -127,16 +133,20 @@ export default (props: Props) => {
   const onSubtract = () => {
     if (amount === '0') return
     if (adding) {
-      setAmount(parseFloat(firstAmount) + parseFloat(secondAmount) + '-')
-      setFirstAmount(parseFloat(firstAmount) + parseFloat(secondAmount) + '')
+      let total = parseFloat(firstAmount) + parseFloat(secondAmount)
+      // if (total.toString().length >= 12) total = parseFloat(total.toFixed(2))
+      setAmount( total+ '-')
+      setFirstAmount(total + '')
       setSecondAmount('0')
       setAdding(false)
       setSubtracting(true)
       return
     }
     if (subtracting) {
-      setAmount(parseFloat(firstAmount) - parseFloat(secondAmount) + '-')
-      setFirstAmount(parseFloat(firstAmount) - parseFloat(secondAmount) + '')
+      let total = parseFloat(firstAmount) - parseFloat(secondAmount)
+      // if (total.toString().length >= 12) total = parseFloat(total.toFixed(2))
+      setAmount( total + '-')
+      setFirstAmount(total + '')
       setSecondAmount('0')
     } else {
       setSubtracting(true)

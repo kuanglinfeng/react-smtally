@@ -8,7 +8,7 @@ type RecordItem = {
   id?: string
   type: '+' | '-'
   tag: Tag
-  notes?: string
+  remark?: string
   amount: number
   date: string
 }

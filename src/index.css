@@ -31,6 +31,10 @@ body {
   line-height: 1.2;
 }
 
+html, body {
+  height: 100vh;
+}
+
 .am-picker-popup-header > .am-picker-popup-item {
   color: #55C6B2;
 }
