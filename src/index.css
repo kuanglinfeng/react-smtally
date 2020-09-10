@@ -30,3 +30,11 @@ body {
   font-size: 16px;
   line-height: 1.2;
 }
+
+.am-picker-popup-header > .am-picker-popup-item {
+  color: #55C6B2;
+}
+
+.am-picker-popup-header > .am-picker-popup-title {
+  color: #000;
+}

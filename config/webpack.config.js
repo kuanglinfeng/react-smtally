@@ -371,6 +371,7 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  ["import", { libraryName: "antd-mobile", style: "css" }], // `style: true` 会加载 less 文件
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {

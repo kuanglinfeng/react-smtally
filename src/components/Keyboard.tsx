@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Icon from './Icon'
 import theme from '../theme'
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
         height: 108px;
         float: right;
         color: #fff;
-        background: ${theme.color};
+        background: ${ theme.color };
         &:active {
           opacity: .7;
         }
@@ -35,8 +35,8 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  onAmountChange?: (amount: number) => void
-  onSubmit?: () => void
+  onValueChange: (value: string) => void
+  onSubmit: (amount: number) => void
 }
 
 export default (props: Props) => {
@@ -46,23 +46,31 @@ export default (props: Props) => {
   const [subtracting, setSubtracting] = useState(false)
   const [firstAmount, setFirstAmount] = useState('0')
   const [secondAmount, setSecondAmount] = useState('0')
+  
+  useEffect(() => {
+    props.onValueChange(amount)
+  }, [props, amount])
 
   const save = () => {
     if (adding) {
       const totalAmount = parseFloat(firstAmount) + parseFloat(secondAmount)
-      setAmount( totalAmount+ '')
+      setAmount(totalAmount + '')
       setFirstAmount(totalAmount + '')
       setSecondAmount('0')
       setAdding(false)
     } else if (subtracting) {
       const totalAmount = parseFloat(firstAmount) - parseFloat(secondAmount)
-      setAmount( totalAmount + '')
+      setAmount(totalAmount + '')
       setFirstAmount(totalAmount + '')
       setSecondAmount('0')
       setSubtracting(false)
-    }else {
+    } else {
       const formatAmount = parseFloat(parseFloat(amount).toFixed(2))
-      if (formatAmount < 0) alert('请输入正确的金额！'); else alert(formatAmount)
+      if (formatAmount < 0) {
+        alert('请输入正确的金额！')
+      } else {
+        props.onSubmit(formatAmount)
+      }
       clear()
     }
   }
@@ -73,7 +81,7 @@ export default (props: Props) => {
     if (amount.length === 16) return
     // 开启计算模式
     if (adding || subtracting) {
-      setSecondAmount(secondAmount === '0' ? inputValue: secondAmount + inputValue)
+      setSecondAmount(secondAmount === '0' ? inputValue : secondAmount + inputValue)
       setAmount(amount + inputValue)
       return
     }
@@ -139,32 +147,23 @@ export default (props: Props) => {
 
   return (
     <Wrapper>
-        <button onClick={onNumberClick}>1</button>
-        <button onClick={onNumberClick}>2</button>
-        <button onClick={onNumberClick}>3</button>
-        <button onClick={onAdd}>+</button>
-        <button onClick={onNumberClick}>4</button>
-        <button onClick={onNumberClick}>5</button>
-        <button onClick={onNumberClick}>6</button>
-        <button onClick={onSubtract}>-</button>
-        <button onClick={onNumberClick}>7</button>
-        <button onClick={onNumberClick}>8</button>
-        <button onClick={onNumberClick}>9</button>
-        <button className='save' onClick={save}>{adding || subtracting ? '=' : '保存'}</button>
-        <button onClick={onNumberClick}>.</button>
-        <button onClick={onNumberClick}>0</button>
-        <button onClick={clear}>
-          <Icon name="delete" />
-        </button>
-      {'adding' + adding}
-      <br/>
-      {'subtracting' + subtracting}
-      <br/>
-      {'amount为' + amount}
-      <br/>
-      {'firstAmount为' + firstAmount}
-      <br/>
-      {'secondAmount为' + secondAmount}
+      <button onClick={ onNumberClick }>1</button>
+      <button onClick={ onNumberClick }>2</button>
+      <button onClick={ onNumberClick }>3</button>
+      <button onClick={ onAdd }>+</button>
+      <button onClick={ onNumberClick }>4</button>
+      <button onClick={ onNumberClick }>5</button>
+      <button onClick={ onNumberClick }>6</button>
+      <button onClick={ onSubtract }>-</button>
+      <button onClick={ onNumberClick }>7</button>
+      <button onClick={ onNumberClick }>8</button>
+      <button onClick={ onNumberClick }>9</button>
+      <button className='save' onClick={ save }>{ adding || subtracting ? '=' : '保存' }</button>
+      <button onClick={ onNumberClick }>.</button>
+      <button onClick={ onNumberClick }>0</button>
+      <button onClick={ clear }>
+        <Icon name="delete" />
+      </button>
     </Wrapper>
   )
 }
