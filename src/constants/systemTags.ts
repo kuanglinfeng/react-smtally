@@ -1,4 +1,4 @@
-type SystemTags = {
+export type SystemTags = {
   [key: string]: TagItem[]
 }
 

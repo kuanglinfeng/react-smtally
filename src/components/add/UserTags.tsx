@@ -12,14 +12,14 @@ const Wrapper = styled.div`
   background: #FDFAF1;
 `
 
-const Tags = styled.ul`
+export const Tags = styled.ul`
   display:flex;
   flex-wrap: wrap;
   padding: 30px 8px 10px 8px;
   overflow: auto;
 `
 
-const TagItem = styled.li`
+export const TagItem = styled.li`
   margin-bottom: 20px;
   width: 20%;
   display:flex;
@@ -32,7 +32,7 @@ const TagItem = styled.li`
   }
 `
 
-const IconWrapper = styled.div`
+export const IconWrapper = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@ const IconWrapper = styled.div`
   }
 `
 
-const Title = styled.span`
+export const Title = styled.span`
   font-size: 12px;
   color: #816E6F;
 `
