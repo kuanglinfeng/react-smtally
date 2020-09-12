@@ -22,13 +22,13 @@ const Wrapper = styled.div`
   }
 `
 
-type Props = {
+export type RadioMenuProps = {
   defaultValue?: string
   values: string[]
   onSelect: (value: string) => void
 }
 
-export default (props: Props) => {
+export default (props: RadioMenuProps) => {
 
   const [text, setText] = useState(props.defaultValue ? props.defaultValue : props.values[0])
 

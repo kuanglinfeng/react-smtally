@@ -1,7 +1,7 @@
 import { DatePicker } from 'antd-mobile'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import theme from '../theme'
+import theme from 'theme'
 import dayjs from 'dayjs'
 
 const Wrapper = styled.div`

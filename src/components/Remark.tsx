@@ -40,7 +40,7 @@ export default (props: Props) => {
         { text: '取消' },
         {
           text: '确认',
-          onPress: value => new Promise((resolve, reject) => {
+          onPress: value => new Promise((resolve) => {
             setValue(value)
             props.onChange(value)
             resolve()

@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Icon from './Icon'
-import theme from '../theme'
+import Icon from 'components/Icon'
+import theme from 'theme'
 
 const Wrapper = styled.div`
   width: 100%;

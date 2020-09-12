@@ -4,6 +4,7 @@ import NotFound from 'views/NotFound'
 import Chart from 'views/Chart'
 import Add from 'views/Add'
 import Bill from 'views/Bill'
+import Tags from 'views/Tags'
 
 function App() {
 
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/chart">
           <Chart />
+        </Route>
+        <Route path='/tags'>
+          <Tags />
         </Route>
         <Redirect from="/" to="bill" exact />
         <Route path="*">

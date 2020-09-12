@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import RadioMenu from '../RadioMenu'
-import theme from '../../theme'
-import Icon from '../Icon'
+import RadioMenu, { RadioMenuProps } from 'components/RadioMenu'
+import theme from 'theme'
+import Icon from 'components/Icon'
 import {useHistory} from 'react-router-dom'
 
 const Header = styled.header`
@@ -24,17 +24,13 @@ const Header = styled.header`
   }
 `
 
-type Props = {
-  onSelect: (value: string) => void
-}
-
-export default (props: Props) => {
+export default (props: RadioMenuProps) => {
 
   const history = useHistory()
   return (
     <Header>
       <Icon name="back" onClick={() => history.goBack()}/>
-      <RadioMenu values={['支出', '收入']} onSelect={props.onSelect}/>
+      <RadioMenu values={props.values} onSelect={props.onSelect} defaultValue={props.defaultValue}/>
       <span />
     </Header>
   )

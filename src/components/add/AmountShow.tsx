@@ -1,34 +1,34 @@
 import React from 'react'
 import styled from 'styled-components'
-import DatePicker from '../DatePicker'
-import Remark from '../Remark'
-import theme from '../../theme'
+import DatePicker from 'components/DatePicker'
+import Remark from 'components/Remark'
+import theme from 'theme'
 
-const Wrapper = styled.div`
-  border: 1px solid red;
-`
-
+const Wrapper = styled.div``
 const Amount = styled.span`
   font-weight: 600;
   font-size: 20px;
   color: ${theme.color};
   display: inline-block;
   float: right;
+  height: 52px;
   padding: 14px 5px;
 `
 
 type Props = {
   amount: string
+  onDateSelect: (date: Date) => void
+  onRemarkChange: (remark: string) => void
 }
 
 export default (props: Props) => {
 
   const onRecordDateSelect = (date: Date) => {
-    console.log(date)
+    props.onDateSelect(date)
   }
 
   const onRecordRemarkChange = (value: string) => {
-    console.log(value)
+    props.onRemarkChange(value)
   }
 
   return (

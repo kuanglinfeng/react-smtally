@@ -10,5 +10,5 @@ type RecordItem = {
   tag: Tag
   remark?: string
   amount: number
-  date: string
+  date: Date
 }

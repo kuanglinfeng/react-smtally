@@ -42,3 +42,7 @@ html, body {
 .am-picker-popup-header > .am-picker-popup-title {
   color: #000;
 }
+
+.am-modal-footer > .am-modal-button-group-h >.am-modal-button:nth-child(2) {
+  color: #55C6B2;
+}
