@@ -87,7 +87,7 @@ export default (props: Props) => {
       setSelectedTag(tag)
       props.onSelect(tag)
     } else {
-      history.push('/tags')
+      history.push(`/tags?type=${encodeURIComponent(props.type)}` )
     }
   }
 
