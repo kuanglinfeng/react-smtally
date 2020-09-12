@@ -47,7 +47,11 @@ export const IconWrapper = styled.div`
     }
   }
   &.define {
+    background: #ECF0EF;
     border: 1px dashed #AAAAA8;
+    > .icon {
+      fill: #747777;
+    }
   }
 `
 
@@ -58,6 +62,7 @@ export const Title = styled.span`
 
 type Props = {
   type: '-' | '+'
+  defaultTag?: TagItem
   onSelect: (tag: TagItem) => void
 }
 
@@ -65,19 +70,25 @@ type Props = {
 export default (props: Props) => {
 
   const [userTags, setUserTags] = useState<TagItem[]>([])
-  const [selectedTag, setSelectedTag] = useState(userOutlayTags[0])
+  const [selectedTag, setSelectedTag] = useState()
   const {get, set} = useUserTags(props.type === '-' ? 'userOutlayTags' : 'userIncomeTags')
 
   const history = useHistory()
 
   useEffect(() => {
+    const tags = props.type === '-' ? userOutlayTags : userIncomeTags
+    if (props.defaultTag) {
+      setSelectedTag(props.defaultTag)
+    } else {
+      setSelectedTag(tags[0])
+    }
     // 数据库没有 则设置默认值
     if (get().length === 0) {
-      const tags = props.type === '-' ? userOutlayTags : userIncomeTags
       setUserTags(tags)
       set(tags)
     } else {
       setUserTags(get())
+      setSelectedTag(get()[0])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.type])
