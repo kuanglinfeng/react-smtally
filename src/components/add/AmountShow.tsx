@@ -12,29 +12,31 @@ const Amount = styled.span`
   display: inline-block;
   float: right;
   height: 52px;
-  padding: 14px 5px;
+  padding: 14px 10px 15px 0;
 `
 
 type Props = {
   amount: string
+  defaultDate?: Date
+  defaultRemark?: string
   onDateSelect: (date: Date) => void
   onRemarkChange: (remark: string) => void
 }
 
 export default (props: Props) => {
 
-  const onRecordDateSelect = (date: Date) => {
+  const onDateSelect = (date: Date) => {
     props.onDateSelect(date)
   }
 
-  const onRecordRemarkChange = (value: string) => {
+  const onRemarkChange = (value: string) => {
     props.onRemarkChange(value)
   }
 
   return (
     <Wrapper>
-      <DatePicker onSelect={onRecordDateSelect} />
-      <Remark onChange={onRecordRemarkChange}/>
+      <DatePicker defaultDate={props.defaultDate} onSelect={onDateSelect} />
+      <Remark defaultValue={props.defaultRemark} onChange={onRemarkChange}/>
       <Amount>{'￥' + props.amount}</Amount>
     </Wrapper>
   )

@@ -78,9 +78,12 @@ export default (props: Props) => {
   useEffect(() => {
     const tags = props.type === '-' ? userOutlayTags : userIncomeTags
     if (props.defaultTag) {
+      console.log(props.defaultTag)
       setSelectedTag(props.defaultTag)
+      props.onSelect(props.defaultTag)
     } else {
       setSelectedTag(tags[0])
+      props.onSelect(tags[0])
     }
     // 数据库没有 则设置默认值
     if (get().length === 0) {
@@ -88,7 +91,6 @@ export default (props: Props) => {
       set(tags)
     } else {
       setUserTags(get())
-      setSelectedTag(get()[0])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.type])

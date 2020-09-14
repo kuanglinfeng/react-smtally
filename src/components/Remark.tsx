@@ -23,12 +23,13 @@ const Input = styled.input`
 `
 
 type Props = {
+  defaultValue?: string
   onChange: (value: string) => void
 }
 
 export default (props: Props) => {
 
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(props.defaultValue ? props.defaultValue : '')
 
   const inputChange = (e: any) => {
     setValue(value)

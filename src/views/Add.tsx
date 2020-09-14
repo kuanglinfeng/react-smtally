@@ -4,6 +4,8 @@ import Header from 'components/add/Header'
 import Keyboard from 'components/add/Keyboard'
 import AmountShow from 'components/add/AmountShow'
 import UserTags from 'components/add/UserTags'
+import useRecords from 'hooks/useRecords'
+import { useHistory } from 'react-router-dom'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -18,15 +20,18 @@ export default function () {
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState(new Date())
   const [remark, setRemark] = useState('')
+  const [tag, setTag] = useState()
+  const { add } = useRecords()
+
+  const history = useHistory()
 
   const onTypeSelect = (value: string) => {
     setTypeValue(value === '支出' ? '-' : '+')
   }
 
   const onTagSelect = (tag: TagItem) => {
-    console.log(tag.title)
+    setTag(tag)
   }
-
 
   const onAmountChange = (amount: string) => {
     setAmount(amount)
@@ -41,18 +46,17 @@ export default function () {
   }
 
   const onSubmit = (amount: number) => {
-    console.log('类型：', typeValue)
-    console.log('日期：', date)
-    console.log('备注：', remark)
-    console.log('金额：', amount)
+    add({ type: typeValue, tag: tag, date: date, remark: remark, amount: amount })
+    // 路由跳转到 /bill
+    history.push('/bill')
   }
 
   return (
     <Wrapper>
-      <Header onSelect={onTypeSelect} values={['支出', '收入']} defaultValue={'支出'}/>
-      <UserTags type={typeValue} onSelect={onTagSelect} />
-      <AmountShow amount={amount} onDateSelect={onDateSelect} onRemarkChange={onRemarkChange} />
-      <Keyboard onValueChange={onAmountChange} onSubmit={onSubmit} />
+      <Header onSelect={ onTypeSelect } values={ ['支出', '收入'] } />
+      <UserTags type={ typeValue } onSelect={ onTagSelect } />
+      <AmountShow amount={ amount } onDateSelect={ onDateSelect } onRemarkChange={ onRemarkChange } />
+      <Keyboard onAmountChange={ onAmountChange } onSubmit={ onSubmit } />
     </Wrapper>
   )
 }

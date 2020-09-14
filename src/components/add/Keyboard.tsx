@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Icon from 'components/Icon'
 import theme from 'theme'
+import { Toast } from 'antd-mobile'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,20 +36,21 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  onValueChange: (value: string) => void
+  defaultAmount?: string
+  onAmountChange: (amount: string) => void
   onSubmit: (amount: number) => void
 }
 
 export default (props: Props) => {
 
-  const [amount, setAmount] = useState('0')
+  const [amount, setAmount] = useState(props.defaultAmount ? props.defaultAmount : '0')
   const [adding, setAdding] = useState(false)
   const [subtracting, setSubtracting] = useState(false)
   const [firstAmount, setFirstAmount] = useState('0')
   const [secondAmount, setSecondAmount] = useState('0')
   
   useEffect(() => {
-    props.onValueChange(amount)
+    props.onAmountChange(amount)
   }, [props, amount])
 
   const save = () => {
@@ -67,11 +69,11 @@ export default (props: Props) => {
     } else {
       const formatAmount = parseFloat(parseFloat(amount).toFixed(2))
       if (formatAmount < 0) {
-        alert('请输入正确的金额！')
+        Toast.info('请输入正确的金额哦！', 2)
       } else {
         props.onSubmit(formatAmount)
+        clear()
       }
-      clear()
     }
   }
 

@@ -42,12 +42,13 @@ const Calendar = styled.div`
 `
 
 type Props = {
+  defaultDate?: Date
   onSelect: (value: any) => void
 }
 
 export default (props: Props) => {
 
-  const [date, setDate] = useState(new Date(dayjs().toString()))
+  const [date, setDate] = useState(props.defaultDate ? props.defaultDate : new Date(dayjs().toString()))
   return (
     <Wrapper>
       <DatePicker
