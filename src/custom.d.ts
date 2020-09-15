@@ -7,8 +7,12 @@ type TagItem = {
 type RecordItem = {
   id?: string
   type: '+' | '-'
-  tag: Tag
+  tag: TagItem
   remark?: string
   amount: number
   date: Date
+}
+
+type IconWrapperProps = {
+  backgroundColor: string
 }

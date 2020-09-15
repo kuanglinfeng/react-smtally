@@ -4,6 +4,7 @@ import { userIncomeTags, userOutlayTags } from 'constants/userDefaultTags'
 import Icon from 'components/Icon'
 import useUserTags from 'hooks/useUserTags'
 import { useHistory } from 'react-router-dom'
+import theme from 'theme'
 
 const Wrapper = styled.div`
   flex-grow: 99;
@@ -39,9 +40,9 @@ export const IconWrapper = styled.div`
   background: #ECF0EF;
   height: 40px; width: 40px;  
   border-radius: 50%;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
   &.active {
-    background: #7697CE;
+    background: ${(props: IconWrapperProps) => props.backgroundColor};
     > .icon {
       fill: #fff;
     }
@@ -110,7 +111,7 @@ export default (props: Props) => {
         {
           userTags.map(tag => {
             return (<TagItem key={tag.value} onClick={() => onTagClick(tag)}>
-              <IconWrapper className={`${selectedTag.value === tag.value ? 'active': ''} ${tag.value === 'define' ? 'define': ''}`}>
+              <IconWrapper backgroundColor={theme.tagColors[tag.value]} className={`${selectedTag.value === tag.value ? 'active': ''} ${tag.value === 'define' ? 'define': ''}`}>
                 <Icon name={tag.value} />
               </IconWrapper>
               <Title>{tag.title}</Title>

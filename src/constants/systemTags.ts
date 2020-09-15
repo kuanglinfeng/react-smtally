@@ -3,7 +3,7 @@ export type SystemTags = {
 }
 
 export const systemOutlayTags: SystemTags = {
-  // 餐饮类
+  // 餐饮类 7
   cateringTags: [
     { title: '餐饮', value: 'catering' },
     { title: '早餐', value: 'breakfast' },
@@ -13,7 +13,7 @@ export const systemOutlayTags: SystemTags = {
     { title: '小吃', value: 'refreshments' },
     { title: '酒水', value: 'drink' }
   ],
-  // 购物类
+  // 购物类 8
   shoppingTags: [
     { title: '购物', value: 'shopping' },
     { title: '日用品', value: 'commodity' },
@@ -24,7 +24,7 @@ export const systemOutlayTags: SystemTags = {
     { title: '化妆品', value: 'cosmetic' },
     { title: '果蔬', value: 'fruits' }
   ],
-  // 娱乐类
+  // 娱乐类 5
   entertainmentTags: [
     { title: '娱乐', value: 'entertainment' },
     { title: '游戏', value: 'game' },
@@ -32,7 +32,7 @@ export const systemOutlayTags: SystemTags = {
     { title: '运动', value: 'sport' },
     { title: '旅游', value: 'travel' }
   ],
-  // 交通类
+  // 交通类 8
   transportationTags: [
     { title: '交通', value: 'transportation' },
     { title: '公交', value: 'bus' },
@@ -43,7 +43,7 @@ export const systemOutlayTags: SystemTags = {
     { title: '出租车', value: 'taxi' },
     { title: '滴滴', value: 'didi' }
   ],
-  // 居住类
+  // 居住类 5
   liveTags: [
     { title: '居住', value: 'live' },
     { title: '话费网费', value: 'call' },
@@ -51,20 +51,20 @@ export const systemOutlayTags: SystemTags = {
     { title: '维修', value: 'repair' },
     { title: '房租', value: 'rent' }
   ],
-  // 医疗类
+  // 医疗类 3
   medicineTags: [
     { title: '医疗', value: 'medicine' },
     { title: '药品费', value: 'drug' },
     { title: '手术费', value: 'operation' }
   ],
-  // 其它
+  // 其它 1
   otherTags: [
     { title: '其它', value: 'other' }
   ]
 }
 
 export const systemIncomeTags: SystemTags = {
-  // 理财类
+  // 理财类 6
   moneyManagementTags: [
     { title: '理财', value: 'moneyManagement' },
     { title: '工资', value: 'salary' },

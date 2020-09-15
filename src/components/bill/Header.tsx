@@ -4,7 +4,6 @@ import Header from 'components/Header'
 import Icon from 'components/Icon'
 import { Picker } from 'antd-mobile'
 import { PickerData } from 'antd-mobile/es/picker/PropsType'
-import dayjs from 'dayjs'
 
 const Wrapper = styled(Header)`
   padding-top: 20px;
@@ -51,13 +50,14 @@ const Total = styled.div`
 type Props = {
   income: number
   outlay: number
-  onMonthChange: (month: string) => void
+  year: number
+  month: number
+  onMonthChange: (month: number) => void
 }
 
 export default (props: Props) => {
 
-  const [year] = useState(dayjs().year())
-  const [month, setMonth] = useState(dayjs().month() + 1 + '')
+  const [month, setMonth] = useState(props.month)
 
   const createPickerData = () => {
     const data: PickerData[] = []
@@ -69,17 +69,18 @@ export default (props: Props) => {
 
   useEffect(() => {
     props.onMonthChange(month)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month])
 
   const onPickerChange = (value: any) => {
-    setMonth(value[0])
+    setMonth(parseInt(value[0]))
   }
 
   return (
     <Wrapper>
       <Date>
-        <span>{ year }年</span>
-        <Picker data={ createPickerData() } title="选择月份" cols={ 1 } value={ [month] } onChange={ onPickerChange }>
+        <span>{ props.year }年</span>
+        <Picker data={ createPickerData() } title="选择月份" cols={ 1 } value={ [month.toString()] } onChange={ onPickerChange }>
           <div>
               <span>
                 { month }
