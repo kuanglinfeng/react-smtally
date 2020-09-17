@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Layout from 'components/Layout'
 import Header from 'components/bill/Header'
 import useRecords from 'hooks/useRecords'
@@ -17,17 +18,34 @@ import {
   DateItem,
   Bill
 } from 'components/bill/Main'
-
+import { ActionSheet } from 'antd-mobile'
 
 export default () => {
 
-  const { getAll } = useRecords()
+  const { getAll, remove } = useRecords()
   const [year] = useState(dayjs().year())
   const [month, setMonth] = useState(dayjs().month() + 1)
+  const refreshPage = useState({})[1]
+  const history = useHistory()
 
-  const onMonthChange = (m: number) => {
-    setMonth(m)
+  const showActionSheet = (id: string) => {
+    const buttons = ['编辑', '删除', '取消']
+    ActionSheet.showActionSheetWithOptions({
+      options: buttons,
+      cancelButtonIndex: buttons.length - 1,
+      destructiveButtonIndex: buttons.length - 2,
+      maskClosable: true
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        history.push(`/add?id=${ id }`)
+      } else if (buttonIndex === 1) {
+        remove(id)
+        refreshPage({})
+      }
+    })
   }
+
+  const onMonthChange = (m: number) => setMonth(m)
 
   const mapRecordsByDate = () => {
     const records = getAll()
@@ -94,7 +112,7 @@ export default () => {
           } else {
             dayAmount.income += record.amount
           }
-          return (<RecordItem key={ record.id }>
+          return (<RecordItem key={ record.id } onClick={ () => showActionSheet(record.id!) }>
             <div className='tag'>
               <IconWrapper backgroundColor={ theme.tagColors[record.tag.value] }>
                 <Icon name={ `${ record.tag.value }` } />
