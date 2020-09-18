@@ -1,11 +1,12 @@
 import React from 'react'
 import Layout from 'components/Layout'
+import NoData from 'components/NoData'
 
 export default function () {
   return (
     <Layout>
       <div>
-        图表页
+        <NoData />
       </div>
     </Layout>
   )

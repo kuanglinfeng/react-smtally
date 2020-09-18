@@ -19,6 +19,7 @@ import {
   Bill
 } from 'components/bill/Main'
 import { ActionSheet } from 'antd-mobile'
+import NoData from 'components/NoData'
 
 export default () => {
 
@@ -144,6 +145,9 @@ export default () => {
         const dateItem = <DateItem key={ prop }>{ title }{ recordsWrapper }</DateItem>
         elements.push(dateItem)
       }
+    }
+    if (elements.length === 0) {
+      return <NoData />
     }
     return <DateList>{ elements }</DateList>
   }
