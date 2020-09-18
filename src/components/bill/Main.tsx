@@ -68,7 +68,7 @@ export const Title = styled.div`
   font-size: 12px;
 `
 
-export const Date = styled.div`
+export const DateSpan = styled.div`
   float: left;
 `
 

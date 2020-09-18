@@ -11,7 +11,7 @@ import {
   Title,
   RecordItem,
   IconWrapper,
-  Date,
+  DateSpan,
   TotalAmount,
   RecordList,
   DateList,
@@ -49,6 +49,11 @@ export default () => {
 
   const mapRecordsByDate = () => {
     const records = getAll()
+    records.sort((a:RecordItem, b: RecordItem) => {
+      let aTime = new Date(a.date).getTime()
+      let bTime = new Date(b.date).getTime()
+      return bTime - aTime
+    })
     const map: any = {}
     records.forEach(record => {
       const y = dayjs(record.date).year()
@@ -127,7 +132,7 @@ export default () => {
           </RecordItem>)
         })
         const title = (<Title>
-          <Date>{ m }月{ d }日 周{ week }</Date>
+          <DateSpan>{ m }月{ d }日 周{ week }</DateSpan>
           <TotalAmount>
             <span>收入：{ dayAmount.income.toFixed(2) }</span>
             <span>支出：{ dayAmount.outlay.toFixed(2) }</span>
