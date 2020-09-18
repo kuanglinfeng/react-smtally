@@ -9,7 +9,7 @@ export default function () {
 
   function get(id: string) {
     const records = getAll()
-    return records.filter(record => record.id === id)[0]
+    return records.find(record => record.id === id)
   }
 
   function add(record: RecordItem) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Header from 'components/add/Header'
 import Keyboard from 'components/add/Keyboard'
@@ -6,6 +6,7 @@ import AmountShow from 'components/add/AmountShow'
 import UserTags from 'components/add/UserTags'
 import useRecords from 'hooks/useRecords'
 import { useHistory } from 'react-router-dom'
+import queryString from 'query-string'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -21,11 +22,20 @@ export default function () {
   const [date, setDate] = useState(new Date())
   const [remark, setRemark] = useState('')
   const [tag, setTag] = useState()
-  const { add } = useRecords()
+  const { add, get, edit } = useRecords()
+
 
   const history = useHistory()
+  const id = queryString.parse(history.location.search).id as string
+  const record = get(id)
+
+  useEffect(() => {
+    record && setTypeValue(record.type)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const onTypeSelect = (value: string) => {
+    console.log('type select')
     setTypeValue(value === '支出' ? '-' : '+')
   }
 
@@ -42,21 +52,46 @@ export default function () {
   }
 
   const onRemarkChange = (remark: string) => {
+    console.log(remark)
     setRemark(remark)
   }
 
   const onSubmit = (amount: number) => {
-    add({ type: typeValue, tag: tag, date: date, remark: remark, amount: amount })
-    // 路由跳转到 /bill
-    history.push('/bill')
+    if (!id) {
+      add({ type: typeValue, tag: tag, date: date, remark: remark, amount: amount })
+      // 路由跳转到 /bill
+      history.push('/bill')
+    } else {
+      console.log('remark:', remark)
+      edit(id, {type: typeValue, tag, remark, date, amount, id})
+      history.push('/bill')
+    }
   }
 
   return (
     <Wrapper>
-      <Header onSelect={ onTypeSelect } values={ ['支出', '收入'] } />
-      <UserTags type={ typeValue } onSelect={ onTagSelect } />
-      <AmountShow amount={ amount } onDateSelect={ onDateSelect } onRemarkChange={ onRemarkChange } />
-      <Keyboard onAmountChange={ onAmountChange } onSubmit={ onSubmit } />
+      <Header
+        defaultValue={record && (record.type === '-' ? '支出':'收入')}
+        onSelect={ onTypeSelect }
+        values={ ['支出', '收入'] }
+      />
+      <UserTags
+        defaultTag={record && record.tag}
+        type={ typeValue }
+        onSelect={ onTagSelect }
+      />
+      <AmountShow
+        defaultDate={record && new Date(record.date)}
+        defaultRemark={record && record.remark}
+        amount={ amount }
+        onDateSelect={ onDateSelect }
+        onRemarkChange={ onRemarkChange }
+      />
+      <Keyboard
+        defaultAmount={record && record.amount.toString()}
+        onAmountChange={ onAmountChange }
+        onSubmit={ onSubmit }
+      />
     </Wrapper>
   )
 }

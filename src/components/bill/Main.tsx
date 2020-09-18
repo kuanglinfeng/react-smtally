@@ -33,9 +33,6 @@ export const RecordItem = styled.li`
   &:last-child {
     border:none;
   }
-  &:first-child {
-    border-bottom: 1px solid #EDEDED;
-  }
   overflow: hidden;
   padding: 10px 0;
   > .tag {

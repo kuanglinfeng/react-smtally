@@ -123,7 +123,7 @@ export default () => {
               </div>
             </div>
             <div
-              className='amount'>{ record.type === '-' ? '-' + record.amount.toFixed(1) : '+' + record.amount.toFixed(1) }</div>
+              className='amount'>{ record.type === '-' ? '-' + record.amount.toFixed(2) : '+' + record.amount.toFixed(2) }</div>
           </RecordItem>)
         })
         const title = (<Title>

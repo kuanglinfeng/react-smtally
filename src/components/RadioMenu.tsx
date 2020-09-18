@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import theme from 'theme'
 
@@ -30,7 +30,14 @@ export type RadioMenuProps = {
 
 export default (props: RadioMenuProps) => {
 
-  const [text, setText] = useState(props.defaultValue ? props.defaultValue : props.values[0])
+  const [text, setText] = useState(props.values[0])
+
+  useEffect(() => {
+    if (props.defaultValue) {
+      setText(props.defaultValue)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const onSelect = (e: any) => {
     setText(e.target.innerText)

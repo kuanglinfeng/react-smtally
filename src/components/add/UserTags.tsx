@@ -67,7 +67,6 @@ type Props = {
   onSelect: (tag: TagItem) => void
 }
 
-
 export default (props: Props) => {
 
   const [userTags, setUserTags] = useState<TagItem[]>([])
@@ -78,20 +77,21 @@ export default (props: Props) => {
 
   useEffect(() => {
     const tags = props.type === '-' ? userOutlayTags : userIncomeTags
-    if (props.defaultTag) {
-      console.log(props.defaultTag)
-      setSelectedTag(props.defaultTag)
-      props.onSelect(props.defaultTag)
-    } else {
+    // 没有传入默认选中的tag 则默认选中选对应类型tag列表的第一个
+    if (!props.defaultTag) {
       setSelectedTag(tags[0])
       props.onSelect(tags[0])
+    } else {
+      setSelectedTag(props.defaultTag)
+      props.onSelect(props.defaultTag)
     }
+    const dbUserTags = get()
     // 数据库没有 则设置默认值
-    if (get().length === 0) {
+    if (dbUserTags.length === 0) {
       setUserTags(tags)
       set(tags)
     } else {
-      setUserTags(get())
+      setUserTags(dbUserTags)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.type])

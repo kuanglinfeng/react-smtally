@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'components/DatePicker'
 import Remark from 'components/Remark'
@@ -32,6 +32,13 @@ export default (props: Props) => {
   const onRemarkChange = (value: string) => {
     props.onRemarkChange(value)
   }
+
+  useEffect(() => {
+    if (props.defaultRemark) {
+      props.onRemarkChange(props.defaultRemark)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Wrapper>
