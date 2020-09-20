@@ -111,7 +111,6 @@ export default () => {
         const m = dayjs(prop).month() + 1
         const d = dayjs(prop).date()
         const week = weekMap[dayjs(prop).day()]
-        console.log('week', dayjs(prop).day())
         const records = map[prop].map((record: RecordItem) => {
           if (record.type === '-') {
             dayAmount.outlay += record.amount
