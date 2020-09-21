@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from 'components/Header'
-import Icon from 'components/Icon'
-import { Picker } from 'antd-mobile'
-import { PickerData } from 'antd-mobile/es/picker/PropsType'
+import SelectMonth from 'components/SelectMonth'
 
 const Wrapper = styled(Header)`
   padding-top: 20px;
@@ -59,35 +57,16 @@ export default (props: Props) => {
 
   const [month, setMonth] = useState(props.month)
 
-  const createPickerData = () => {
-    const data: PickerData[] = []
-    for (let i = 1; i < 13; i++) {
-      data.push({ label: i.toString(), value: i.toString() })
-    }
-    return data
-  }
-
-  useEffect(() => {
-    props.onMonthChange(month)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month])
-
-  const onPickerChange = (value: any) => {
-    setMonth(parseInt(value[0]))
+  const onMonthChange = (value: number) => {
+    setMonth(value)
+    props.onMonthChange(value)
   }
 
   return (
     <Wrapper>
       <Date>
         <span>{ props.year }年</span>
-        <Picker data={ createPickerData() } title="选择月份" cols={ 1 } value={ [month.toString()] } onChange={ onPickerChange }>
-          <div>
-              <span>
-                { month }
-              </span>
-            <div>月<Icon name="down" /></div>
-          </div>
-        </Picker>
+        <SelectMonth month={month} onMonthChange={onMonthChange} />
       </Date>
       <Total>
         <div>

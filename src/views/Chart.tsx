@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import LineChart from 'components/chart/LineChart'
 import PieChart from 'components/chart/PieChart'
+import Header from 'components/chart/Header'
+import dayjs from 'dayjs'
 
 var data = [{
   name: '餐饮',
@@ -24,14 +26,23 @@ var data = [{
 }, {
   name: '医疗',
   value: 18
-}];
+}]
 
 export default function () {
+
+  const [month, setMonth] = useState(dayjs().month() + 1)
+
+  const onMonthChange = (month: number) => {
+    setMonth(month)
+    console.log(month)
+  }
+
   return (
     <Layout>
       <div>
-        <LineChart xData={['1', '2', '3']} yData={[200, 100, 300]} />
-        <PieChart data={data}/>
+        <Header year={dayjs().year()} month={month} onMonthChange={onMonthChange} />
+        <LineChart xData={ ['1', '2', '3'] } yData={ [200, 100, 300] } />
+        <PieChart data={ data } />
       </div>
     </Layout>
   )
