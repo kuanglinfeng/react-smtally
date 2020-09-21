@@ -4,7 +4,7 @@ import LineChart from 'components/chart/LineChart'
 import PieChart from 'components/chart/PieChart'
 import Header from 'components/chart/Header'
 import dayjs from 'dayjs'
-import ChartType from 'components/chart/ChartType'
+import ChartType from 'components/chart/ChartTypes'
 import AmountTypes, { AmountType } from 'components/chart/AmountTypes'
 
 var data = [{
