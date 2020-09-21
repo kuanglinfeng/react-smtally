@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     padding: 5px;
     fill: #fff;
   }
-  background: ${theme.color};
+  background: ${ theme.color };
   color: #fff;
   font-size: 14px;
 `
@@ -58,10 +58,10 @@ export default (props: Props) => {
 
   return (
     <Wrapper>
-      <Icon name="back" onClick={() => history.goBack()} />
+      <Icon name="back" onClick={ () => history.goBack() } />
       <YearAndMonth>
-        {props.year}年
-        <SelectMonth className="selectMonth" month={month} onMonthChange={onMonthChange} />
+        { props.year }年
+        <SelectMonth className="selectMonth" month={ month } onMonthChange={ onMonthChange } />
       </YearAndMonth>
       <Empty />
     </Wrapper>
