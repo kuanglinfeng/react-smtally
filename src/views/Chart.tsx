@@ -5,6 +5,7 @@ import PieChart from 'components/chart/PieChart'
 import Header from 'components/chart/Header'
 import dayjs from 'dayjs'
 import ChartType from 'components/chart/ChartType'
+import AmountTypes, { AmountType } from 'components/chart/AmountTypes'
 
 var data = [{
   name: '餐饮',
@@ -44,11 +45,16 @@ export default function () {
     console.log(value)
   }
 
+  const onAmountTypeSelect = (amountType: AmountType) => {
+    console.log(amountType)
+  }
+
   return (
     <Layout>
       <div>
-        <Header year={dayjs().year()} month={month} onMonthChange={onMonthChange} />
-        <ChartType values={['流水', '分类']} onSelect={onChartTypeSelect} />
+        <Header year={ dayjs().year() } month={ month } onMonthChange={ onMonthChange } />
+        <ChartType values={ ['流水', '分类'] } onSelect={ onChartTypeSelect } />
+        <AmountTypes incomeAmount={ 983 } outlayAmount={ 324 } onTypeSelect={ onAmountTypeSelect } />
         <LineChart xData={ ['1', '2', '3'] } yData={ [200, 100, 300] } />
         <PieChart data={ data } />
       </div>
