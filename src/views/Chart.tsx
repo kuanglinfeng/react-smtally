@@ -6,6 +6,7 @@ import Header from 'components/chart/Header'
 import dayjs from 'dayjs'
 import ChartType from 'components/chart/ChartTypes'
 import AmountTypes from 'components/chart/AmountTypes'
+import useChartData from 'hooks/useChartData'
 
 var data = [{
   name: '餐饮',
@@ -33,7 +34,9 @@ var data = [{
 export default function () {
 
   const [month, setMonth] = useState(dayjs().month() + 1)
-  const setChartTypeValue = useState('')[1]
+  const [amountType, setAmountType] = useState<AmountType>('-')
+  const [chartType, setChartType] = useState('流水')
+  const { getDaysInMonthAmount, getTotalAmountOfMonth } = useChartData()
 
   const onMonthChange = (month: number) => {
     setMonth(month)
@@ -41,12 +44,11 @@ export default function () {
   }
 
   const onChartTypeSelect = (value: string) => {
-    setChartTypeValue(value)
-    console.log(value)
+    setChartType(value)
   }
 
-  const onAmountTypeSelect = (amountType: AmountType) => {
-    console.log(amountType)
+  const onAmountTypeSelect = (type: AmountType) => {
+    setAmountType(type)
   }
 
   return (
@@ -54,9 +56,19 @@ export default function () {
       <div>
         <Header year={ dayjs().year() } month={ month } onMonthChange={ onMonthChange } />
         <ChartType values={ ['流水', '分类'] } onSelect={ onChartTypeSelect } />
-        <AmountTypes incomeAmount={ 983 } outlayAmount={ 324 } onTypeSelect={ onAmountTypeSelect } />
-        <LineChart xData={ ['1', '2', '3'] } yData={ [200, 100, 300] } />
-        <PieChart data={ data } />
+        <AmountTypes
+          incomeAmount={ getTotalAmountOfMonth(dayjs().year(), month).income }
+          outlayAmount={ getTotalAmountOfMonth(dayjs().year(), month).outlay }
+          onTypeSelect={ onAmountTypeSelect }
+        />
+        {
+          chartType === '流水' ?
+            <LineChart
+              xData={ Object.keys(getDaysInMonthAmount(dayjs().year(), month, amountType)) }
+              yData={ Object.values(getDaysInMonthAmount(dayjs().year(), month, amountType)) }
+            /> :
+            <PieChart data={ data } />
+        }
       </div>
     </Layout>
   )
