@@ -1,6 +1,13 @@
 import useRecords from 'hooks/useRecords'
 import dayjs from 'dayjs'
 
+type PieChartDataItem = {
+  name: string
+  value: number
+}
+
+export type PieChartData = PieChartDataItem[]
+
 export default () => {
 
   const { getAll } = useRecords()
@@ -34,6 +41,35 @@ export default () => {
     return {xData: Object.keys(map), yData: Object.values(map)}
   }
 
+  const getAmountByTag = (tagTitle: string) => {
+    const records = getAll()
+    let amount = 0
+    records.forEach(record => {
+      if (tagTitle === record.tag.title) {
+        amount += record.amount
+      }
+    })
+    return amount
+  }
 
-  return { getLineChartData }
+  const getPieChartData = (year: number, month: number, type: AmountType) => {
+    const records = getAll()
+    const dataArray: PieChartData = []
+    const tagsMap: {[key: string]: boolean} = {}
+    records.forEach(record => {
+      const y = dayjs(record.date).year()
+      const m = dayjs(record.date).month() + 1
+      if (y === year && m === month && record.type === type && !tagsMap[record.tag.title]) {
+        tagsMap[record.tag.title] = true
+      }
+    })
+    const tags = Object.keys(tagsMap)
+    tags.forEach(tag => {
+      dataArray.push({name: tag, value: getAmountByTag(tag)})
+    })
+    return dataArray
+  }
+
+
+  return { getLineChartData, getPieChartData }
 }

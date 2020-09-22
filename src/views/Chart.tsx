@@ -8,36 +8,14 @@ import ChartType from 'components/chart/ChartTypes'
 import AmountTypes from 'components/chart/AmountTypes'
 import useChartData from 'hooks/useChartData'
 import useRecordsHandler from 'hooks/useRecordsHandler'
-
-var data = [{
-  name: '餐饮',
-  value: 70
-}, {
-  name: '水电',
-  value: 68
-}, {
-  name: '购物',
-  value: 48
-}, {
-  name: '游戏',
-  value: 40
-}, {
-  name: '旅游',
-  value: 32
-}, {
-  name: '小吃',
-  value: 27
-}, {
-  name: '医疗',
-  value: 18
-}]
+import NoData from 'components/NoData'
 
 export default function () {
 
   const [month, setMonth] = useState(dayjs().month() + 1)
   const [amountType, setAmountType] = useState<AmountType>('-')
   const [chartType, setChartType] = useState('流水')
-  const { getLineChartData } = useChartData()
+  const { getLineChartData, getPieChartData } = useChartData()
   const { getTotalAmountOfMonth } = useRecordsHandler()
 
   const onMonthChange = (month: number) => {
@@ -52,6 +30,9 @@ export default function () {
     setAmountType(type)
   }
 
+  const lineChartData = getLineChartData(dayjs().year(), month, amountType)
+  const pieChartData = getPieChartData(dayjs().year(), month, amountType)
+
   return (
     <Layout>
       <div>
@@ -63,12 +44,13 @@ export default function () {
           onTypeSelect={ onAmountTypeSelect }
         />
         {
-          chartType === '流水' ?
+          lineChartData.yData.length === 0 || pieChartData.length === 0 ? <NoData height={'40%'} /> :
+            chartType === '流水' ?
             <LineChart
-              xData={ getLineChartData(dayjs().year(), month, amountType).xData }
-              yData={ getLineChartData(dayjs().year(), month, amountType).yData }
+              xData={ lineChartData.xData }
+              yData={ lineChartData.yData }
             /> :
-            <PieChart data={ data } />
+            <PieChart data={ pieChartData } />
         }
       </div>
     </Layout>
