@@ -4,13 +4,13 @@ import theme from 'theme'
 
 const Wrapper = styled.div`
   border: 1px solid #fff;
-  width: 40%;
+  width: 60%;
   border-radius: 4px;
-  background: #fff;
-  color: ${theme.color};
+  background: ${ theme.color };
+  color: #fff;
   display:flex;
   > button {
-   font-size: 14px;
+   padding: 4px 0;
    display:flex;
    align-items: center;
    justify-content: center;
