@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import ChartType from 'components/chart/ChartTypes'
 import AmountTypes from 'components/chart/AmountTypes'
 import useChartData from 'hooks/useChartData'
+import useRecordsHandler from 'hooks/useRecordsHandler'
 
 var data = [{
   name: '餐饮',
@@ -36,11 +37,11 @@ export default function () {
   const [month, setMonth] = useState(dayjs().month() + 1)
   const [amountType, setAmountType] = useState<AmountType>('-')
   const [chartType, setChartType] = useState('流水')
-  const { getDaysInMonthAmount, getTotalAmountOfMonth } = useChartData()
+  const { getLineChartData } = useChartData()
+  const { getTotalAmountOfMonth } = useRecordsHandler()
 
   const onMonthChange = (month: number) => {
     setMonth(month)
-    console.log(month)
   }
 
   const onChartTypeSelect = (value: string) => {
@@ -64,8 +65,8 @@ export default function () {
         {
           chartType === '流水' ?
             <LineChart
-              xData={ Object.keys(getDaysInMonthAmount(dayjs().year(), month, amountType)) }
-              yData={ Object.values(getDaysInMonthAmount(dayjs().year(), month, amountType)) }
+              xData={ getLineChartData(dayjs().year(), month, amountType).xData }
+              yData={ getLineChartData(dayjs().year(), month, amountType).yData }
             /> :
             <PieChart data={ data } />
         }

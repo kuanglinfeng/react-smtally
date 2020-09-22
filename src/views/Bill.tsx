@@ -20,14 +20,17 @@ import {
 } from 'components/bill/Main'
 import { ActionSheet } from 'antd-mobile'
 import NoData from 'components/NoData'
+import useRecordsHandler from 'hooks/useRecordsHandler'
 
 export default () => {
 
-  const { getAll, remove } = useRecords()
+  const { remove } = useRecords()
   const [year] = useState(dayjs().year())
   const [month, setMonth] = useState(dayjs().month() + 1)
   const refreshPage = useState({})[1]
   const history = useHistory()
+
+  const { filterRecordsByYearAndMonth, getTotalAmountOfMonth } = useRecordsHandler()
 
   const showActionSheet = (id: string) => {
     const buttons = ['编辑', '删除', '取消']
@@ -47,57 +50,6 @@ export default () => {
   }
 
   const onMonthChange = (m: number) => setMonth(m)
-
-  const mapRecordsByDate = () => {
-    const records = getAll()
-    records.sort((a:RecordItem, b: RecordItem) => {
-      let aTime = new Date(a.date).getTime()
-      let bTime = new Date(b.date).getTime()
-      return bTime - aTime
-    })
-    const map: any = {}
-    records.forEach(record => {
-      const y = dayjs(record.date).year()
-      const m = dayjs(record.date).month() + 1
-      const d = dayjs(record.date).date()
-      if (!map[`${ y }-${ m }-${ d }`]) {
-        map[`${ y }-${ m }-${ d }`] = [record]
-      } else {
-        map[`${ y }-${ m }-${ d }`].push(record)
-      }
-    })
-    return map
-  }
-
-  function filterRecordsByYearAndMonth(year: number, month: number): { [key: string]: RecordItem[] } {
-    const dateMap = mapRecordsByDate()
-    const map: any = {}
-    for (const prop in dateMap) {
-      if (dateMap.hasOwnProperty(prop)) {
-        const y = parseInt(prop.split('-')[0])
-        const m = parseInt(prop.split('-')[1])
-        if (year === y && month === m) {
-          map[prop] = dateMap[prop]
-        }
-      }
-    }
-    return map
-  }
-
-  const calcMonthAmount = (type: '-' | '+') => {
-    const map = filterRecordsByYearAndMonth(year, month)
-    let total = 0
-    let records: RecordItem[] = []
-    Object.values(map).forEach(arr => {
-      records = [...records, ...arr]
-    })
-    records.forEach(record => {
-      if (record.type === type) {
-        total += record.amount
-      }
-    })
-    return parseFloat(total.toFixed(2))
-  }
 
   const renderEl = () => {
     const map = filterRecordsByYearAndMonth(year, month)
@@ -157,8 +109,8 @@ export default () => {
         <Header
           year={ year }
           month={ month }
-          income={ calcMonthAmount('+') }
-          outlay={ calcMonthAmount('-') }
+          income={ getTotalAmountOfMonth(year, month).income }
+          outlay={ getTotalAmountOfMonth(year, month).outlay }
           onMonthChange={ onMonthChange }
         />
         { renderEl() }

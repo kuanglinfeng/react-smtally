@@ -24,7 +24,6 @@ export default function () {
   const [tag, setTag] = useState()
   const { add, get, edit } = useRecords()
 
-
   const history = useHistory()
   const id = queryString.parse(history.location.search).id as string
   const record = get(id)
@@ -35,7 +34,6 @@ export default function () {
   }, [])
 
   const onTypeSelect = (value: string) => {
-    console.log('type select')
     setTypeValue(value === '支出' ? '-' : '+')
   }
 

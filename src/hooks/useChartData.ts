@@ -6,13 +6,13 @@ export default () => {
   const { getAll } = useRecords()
 
   /**
-   * 获取某年某个月每天的支出/收入的金额
+   * 获取折线图的x轴和y轴的数据
    * @param year
    * @param month
    * @param type
    * @return {[day: string]: amount}
    */
-  const getDaysInMonthAmount = (year: number, month: number, type: AmountType) => {
+  const getLineChartData = (year: number, month: number, type: AmountType) => {
     const days = dayjs(year + '' + month ).daysInMonth()
     const records = getAll()
     const map: { [key: string]: number } = {}
@@ -31,25 +31,9 @@ export default () => {
         }
       }
     })
-    return map
+    return {xData: Object.keys(map), yData: Object.values(map)}
   }
 
-  const getTotalAmountOfMonth = (year: number, month: number) => {
-    const records = getAll()
-    let income: number = 0
-    let outlay: number = 0
-    records.forEach(record => {
-      const y = dayjs(record.date).year()
-      const m = dayjs(record.date).month() + 1
-      if (y === year && m === month && record.type === '+') {
-        income += record.amount
-      }
-      if (y === year && m === month && record.type === '-') {
-        outlay += record.amount
-      }
-    })
-    return {outlay, income}
-  }
 
-  return { getDaysInMonthAmount, getTotalAmountOfMonth }
+  return { getLineChartData }
 }
