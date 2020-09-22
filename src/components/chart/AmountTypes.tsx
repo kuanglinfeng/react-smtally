@@ -41,7 +41,7 @@ const Income = styled.div`
   }
 `
 
-export type AmountType = 'outlay' | 'income'
+export
 
 type AmountTypeProps = {
   outlayAmount: number
@@ -51,36 +51,36 @@ type AmountTypeProps = {
 
 export default (props: AmountTypeProps) => {
 
-  const [amountType, setAmountType] = useState<AmountType>('outlay')
+  const [amountType, setAmountType] = useState<AmountType>('-')
 
   useEffect(() => {
     // 使初始化时父组件也能触发on select
-    props.onTypeSelect('outlay')
+    props.onTypeSelect('-')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onOutlaySelect = () => {
-    setAmountType('outlay')
-    props.onTypeSelect('outlay')
+    setAmountType('-')
+    props.onTypeSelect('-')
   }
 
   const onIncomeSelect = () => {
-    setAmountType('income')
-    props.onTypeSelect('income')
+    setAmountType('+')
+    props.onTypeSelect('+')
   }
 
   return (
     <Wrapper>
       <Outlay>
         <div
-          className={`circle ${amountType === 'outlay' ? 'active' : ''}`}
+          className={`circle ${amountType === '-' ? 'active' : ''}`}
           onClick={onOutlaySelect}
         />
         <span>支出:{props.outlayAmount.toFixed(2)}</span>
       </Outlay>
       <Income>
         <div
-          className={`circle ${amountType === 'income' ? 'active' : ''}`}
+          className={`circle ${amountType === '+' ? 'active' : ''}`}
           onClick={onIncomeSelect}
         />
         <span>收入:{props.incomeAmount.toFixed(2)}</span>

@@ -4,9 +4,11 @@ type TagItem = {
   value: string
 }
 
+type AmountType = '+' | '-'
+
 type RecordItem = {
   id?: string
-  type: '+' | '-'
+  type: AmountType
   tag: TagItem
   remark?: string
   amount: number

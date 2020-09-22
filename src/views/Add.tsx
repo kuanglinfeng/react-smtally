@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 export default function () {
 
-  const [typeValue, setTypeValue] = useState<'-' | '+'>('-')
+  const [typeValue, setTypeValue] = useState<AmountType>('-')
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState(new Date())
   const [remark, setRemark] = useState('')
@@ -52,7 +52,6 @@ export default function () {
   }
 
   const onRemarkChange = (remark: string) => {
-    console.log(remark)
     setRemark(remark)
   }
 
@@ -62,7 +61,6 @@ export default function () {
       // 路由跳转到 /bill
       history.push('/bill')
     } else {
-      console.log('remark:', remark)
       edit(id, {type: typeValue, tag, remark, date, amount, id})
       history.push('/bill')
     }
