@@ -71,9 +71,11 @@ const getOption = (props: LineChartProps) => {
 }
 
 export default (props: LineChartProps) => {
-  return <ReactEcharts
-    theme="light"
-    option={ getOption(props) as any }
-    style={ { height: '150px', marginTop: '20px' } }
-  />
+  return (
+    <ReactEcharts
+      theme="light"
+      option={ getOption(props) as any }
+      style={ { height: '150px', marginTop: '20px' } }
+    />
+  )
 }

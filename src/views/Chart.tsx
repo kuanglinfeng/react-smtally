@@ -9,13 +9,32 @@ import AmountTypes from 'components/chart/AmountTypes'
 import useChartData from 'hooks/useChartData'
 import useRecordsHandler from 'hooks/useRecordsHandler'
 import NoData from 'components/NoData'
+import styled from 'styled-components'
+import Rank from 'components/chart/Rank'
+
+const Wrapper = styled.div`
+  display:flex;
+  flex-direction: column;
+`
+
+const Average = styled.span`
+  color: #B9B9B9;
+  font-size: 12px;
+  padding: 10px 15px;
+  display: inline-block;
+`
+
+const Divide = styled.div`
+  background: #EFEFEF;
+  padding: 4px;
+`
 
 export default function () {
 
   const [month, setMonth] = useState(dayjs().month() + 1)
   const [amountType, setAmountType] = useState<AmountType>('-')
   const [chartType, setChartType] = useState('流水')
-  const { getLineChartData, getPieChartData } = useChartData()
+  const { getLineChartData, getPieChartData, getAverageAmountOfMonth } = useChartData()
   const { getTotalAmountOfMonth } = useRecordsHandler()
 
   const onMonthChange = (month: number) => {
@@ -35,7 +54,7 @@ export default function () {
 
   return (
     <Layout>
-      <div>
+      <Wrapper>
         <Header year={ dayjs().year() } month={ month } onMonthChange={ onMonthChange } />
         <ChartType values={ ['流水', '分类'] } onSelect={ onChartTypeSelect } />
         <AmountTypes
@@ -46,13 +65,19 @@ export default function () {
         {
           lineChartData.yData.length === 0 || pieChartData.length === 0 ? <NoData height={'40%'} /> :
             chartType === '流水' ?
-            <LineChart
-              xData={ lineChartData.xData }
-              yData={ lineChartData.yData }
-            /> :
+                <div>
+                  <LineChart
+                    xData={ lineChartData.xData }
+                    yData={ lineChartData.yData }
+                  />
+                  <Average>月平均支出：{getAverageAmountOfMonth(dayjs().year(), month, amountType)}</Average>
+                </div>
+              :
             <PieChart data={ pieChartData } />
         }
-      </div>
+        <Divide />
+        <Rank />
+      </Wrapper>
     </Layout>
   )
 }
