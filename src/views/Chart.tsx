@@ -72,13 +72,23 @@ export default function () {
                 />
                 <Average>月平均{ amountType === '-' ? '支出' : '收入' }：{ getAverageAmountOfMonth(dayjs().year(), month, amountType) }</Average>
                 <Divide />
-                <Rank amountType={amountType} rankData={ getRankData(dayjs().year(), month, amountType) } />
+                <Rank
+                  amountType={amountType}
+                  year={dayjs().year()}
+                  month={month}
+                  rankData={ getRankData(dayjs().year(), month, amountType) }
+                />
               </div>
               :
               <div>
                 <PieChart data={ pieChartData } />
                 <Divide />
-                <Rank amountType={amountType} rankData={ getRankData(dayjs().year(), month, amountType) } />
+                <Rank
+                  amountType={amountType}
+                  year={dayjs().year()}
+                  month={month}
+                  rankData={ getRankData(dayjs().year(), month, amountType) }
+                />
               </div>
         }
       </Wrapper>

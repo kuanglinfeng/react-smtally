@@ -174,7 +174,7 @@ export default (props: Props) => {
       <button onClick={ onNumberClick }>.</button>
       <button onClick={ onNumberClick }>0</button>
       <button onClick={ clear }>
-        <Icon name="delete" />
+        <Icon name="clear" />
       </button>
     </Wrapper>
   )

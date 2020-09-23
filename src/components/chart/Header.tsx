@@ -5,7 +5,7 @@ import theme from 'theme'
 import { useHistory } from 'react-router-dom'
 import SelectMonth from 'components/SelectMonth'
 
-const Wrapper = styled.div`
+export const Header = styled.div`
   padding: 8px 0;
   display:flex;
   justify-content: space-between;
@@ -35,7 +35,7 @@ const YearAndMonth = styled.div`
     }
   }
 `
-const Empty = styled.div`
+export const Empty = styled.div`
   width: 30px;  height: 30px;
 `
 
@@ -57,13 +57,13 @@ export default (props: Props) => {
   }
 
   return (
-    <Wrapper>
+    <Header>
       <Icon name="back" onClick={ () => history.goBack() } />
       <YearAndMonth>
         { props.year }年
         <SelectMonth className="selectMonth" month={ month } onMonthChange={ onMonthChange } />
       </YearAndMonth>
       <Empty />
-    </Wrapper>
+    </Header>
   )
 }
