@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import queryString from 'query-string'
 import styled from 'styled-components'
 import Header from 'components/add/Header'
 import Keyboard from 'components/add/Keyboard'
 import AmountShow from 'components/add/AmountShow'
 import UserTags from 'components/add/UserTags'
 import useRecords from 'hooks/useRecords'
-import { useHistory } from 'react-router-dom'
-import queryString from 'query-string'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -59,7 +59,7 @@ export default function () {
       // 路由跳转到 /bill
       history.push('/bill')
     } else {
-      edit(id, {type: typeValue, tag, remark, date, amount, id})
+      edit(id, { type: typeValue, tag, remark, date, amount, id })
       history.push('/bill')
     }
   }
@@ -67,24 +67,24 @@ export default function () {
   return (
     <Wrapper>
       <Header
-        defaultValue={record && (record.type === '-' ? '支出':'收入')}
+        defaultValue={ record && (record.type === '-' ? '支出' : '收入') }
         onSelect={ onTypeSelect }
         values={ ['支出', '收入'] }
       />
       <UserTags
-        defaultTag={record && record.tag}
+        defaultTag={ record && record.tag }
         type={ typeValue }
         onSelect={ onTagSelect }
       />
       <AmountShow
-        defaultDate={record && new Date(record.date)}
-        defaultRemark={record && record.remark}
+        defaultDate={ record && new Date(record.date) }
+        defaultRemark={ record && record.remark }
         amount={ amount }
         onDateSelect={ onDateSelect }
         onRemarkChange={ onRemarkChange }
       />
       <Keyboard
-        defaultAmount={record && record.amount.toString()}
+        defaultAmount={ record && record.amount.toString() }
         onAmountChange={ onAmountChange }
         onSubmit={ onSubmit }
       />

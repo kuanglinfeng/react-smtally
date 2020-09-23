@@ -1,5 +1,5 @@
-import db from "../utils/db";
-import createId from "../utils/createId";
+import db from '../utils/db'
+import createId from '../utils/createId'
 
 export default function () {
 
@@ -21,7 +21,7 @@ export default function () {
 
   function remove(id: string) {
     const records = getAll()
-    if (records.length === 0) return 
+    if (records.length === 0) return
     const index: number = records.findIndex(record => record.id === id)
     if (index === -1) return
     records.splice(index, 1)
@@ -35,6 +35,6 @@ export default function () {
     records.splice(index, 1, record)
     db.set('records', JSON.stringify(records))
   }
-  
-  return {get, getAll, add, remove, edit}
+
+  return { get, getAll, add, remove, edit }
 }

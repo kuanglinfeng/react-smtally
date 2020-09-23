@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
+import dayjs from 'dayjs'
+import styled from 'styled-components'
 import Layout from 'components/Layout'
 import LineChart from 'components/chart/LineChart'
 import PieChart from 'components/chart/PieChart'
 import Header from 'components/chart/Header'
-import dayjs from 'dayjs'
 import ChartType from 'components/chart/ChartTypes'
 import AmountTypes from 'components/chart/AmountTypes'
+import NoData from 'components/NoData'
+import Rank from 'components/chart/Rank'
 import useChartData from 'hooks/useChartData'
 import useRecordsHandler from 'hooks/useRecordsHandler'
-import NoData from 'components/NoData'
-import styled from 'styled-components'
-import Rank from 'components/chart/Rank'
 
 const Wrapper = styled.div`
   display:flex;
@@ -73,9 +73,9 @@ export default function () {
                 <Average>月平均{ amountType === '-' ? '支出' : '收入' }：{ getAverageAmountOfMonth(dayjs().year(), month, amountType) }</Average>
                 <Divide />
                 <Rank
-                  amountType={amountType}
-                  year={dayjs().year()}
-                  month={month}
+                  amountType={ amountType }
+                  year={ dayjs().year() }
+                  month={ month }
                   rankData={ getRankData(dayjs().year(), month, amountType) }
                 />
               </div>
@@ -84,9 +84,9 @@ export default function () {
                 <PieChart data={ pieChartData } />
                 <Divide />
                 <Rank
-                  amountType={amountType}
-                  year={dayjs().year()}
-                  month={month}
+                  amountType={ amountType }
+                  year={ dayjs().year() }
+                  month={ month }
                   rankData={ getRankData(dayjs().year(), month, amountType) }
                 />
               </div>

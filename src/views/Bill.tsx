@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { ActionSheet } from 'antd-mobile'
+import dayjs from 'dayjs'
 import Layout from 'components/Layout'
 import Header from 'components/bill/Header'
-import useRecords from 'hooks/useRecords'
-import dayjs from 'dayjs'
 import Icon from 'components/Icon'
-import weekMap from 'constants/weekMap'
-import theme from 'theme'
+import NoData from 'components/NoData'
 import {
   Title,
   RecordItem,
@@ -18,9 +17,10 @@ import {
   DateItem,
   Bill
 } from 'components/bill/Main'
-import { ActionSheet } from 'antd-mobile'
-import NoData from 'components/NoData'
+import useRecords from 'hooks/useRecords'
 import useRecordsHandler from 'hooks/useRecordsHandler'
+import weekMap from 'constants/weekMap'
+import theme from 'theme'
 
 export const renderRecords = (map: { [key: string]: RecordItem[] }, showActionSheet?: (id: string) => void) => {
   const elements = []
@@ -80,7 +80,6 @@ export default () => {
   const [month, setMonth] = useState(dayjs().month() + 1)
   const refreshPage = useState({})[1]
   const history = useHistory()
-
   const { filterRecordsByYearAndMonth, getTotalAmountOfMonth } = useRecordsHandler()
 
   const showActionSheet = (id: string) => {

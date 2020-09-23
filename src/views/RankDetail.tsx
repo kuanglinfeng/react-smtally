@@ -4,11 +4,10 @@ import { useLocation, useHistory } from 'react-router-dom'
 import queryString from 'query-string'
 import { Header, Empty } from 'components/chart/Header'
 import Icon from 'components/Icon'
-import useRecordsHandler from 'hooks/useRecordsHandler'
 import { renderRecords } from 'views/Bill'
+import useRecordsHandler from 'hooks/useRecordsHandler'
 
-const Wrapper = styled.div`
-`
+const Wrapper = styled.div``
 
 const Title = styled.div`
   display:flex;

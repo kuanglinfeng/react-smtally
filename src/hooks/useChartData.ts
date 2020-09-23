@@ -13,7 +13,7 @@ export default () => {
   const { getAll } = useRecords()
 
   const getLineChartData = (year: number, month: number, type: AmountType) => {
-    const days = dayjs(year + '' + month ).daysInMonth()
+    const days = dayjs(year + '' + month).daysInMonth()
     const records = getAll()
     const map: { [key: string]: number } = {}
     for (let i = 1; i < days + 1; i++) {
@@ -31,7 +31,7 @@ export default () => {
         }
       }
     })
-    return {xData: Object.keys(map), yData: Object.values(map)}
+    return { xData: Object.keys(map), yData: Object.values(map) }
   }
 
   const getAmountByTag = (tagTitle: string) => {
@@ -48,7 +48,7 @@ export default () => {
   const getPieChartData = (year: number, month: number, type: AmountType) => {
     const records = getAll()
     const dataArray: PieChartData = []
-    const tagsMap: {[key: string]: boolean} = {}
+    const tagsMap: { [key: string]: boolean } = {}
     records.forEach(record => {
       const y = dayjs(record.date).year()
       const m = dayjs(record.date).month() + 1
@@ -58,13 +58,10 @@ export default () => {
     })
     const tags = Object.keys(tagsMap)
     tags.forEach(tag => {
-      dataArray.push({name: tag, value: getAmountByTag(tag)})
+      dataArray.push({ name: tag, value: getAmountByTag(tag) })
     })
     return dataArray
   }
-
-
-
 
   return { getLineChartData, getPieChartData }
 }

@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const IconBorder = styled(IconWrapper)`
   &.selected {
-     background: ${(props: IconWrapperProps) => props.backgroundColor};
+     background: ${ (props: IconWrapperProps) => props.backgroundColor };
     .icon {
       fill: #fff;
     }
@@ -79,7 +79,8 @@ export default () => {
         const tagType = <TagType>{ systemTags[prop][0].title }</TagType>
         const tags = systemTags[prop].map(tag => {
           return (<TagItem key={ tag.value } onClick={ () => onTagClick(tag) }>
-            <IconBorder backgroundColor={theme.tagColors[tag.value]} className={ isTagSelected(tag) ? 'selected' : '' }>
+            <IconBorder backgroundColor={ theme.tagColors[tag.value] }
+                        className={ isTagSelected(tag) ? 'selected' : '' }>
               <Icon name={ tag.value } />
             </IconBorder>
             <Title>{ tag.title }</Title>
@@ -99,9 +100,7 @@ export default () => {
         <Icon name="back" onClick={ () => history.goBack() } />
         <Button onClick={ onSubmit }>确定</Button>
       </Header>
-      <Main>
-        { renderEl(systemTags) }
-      </Main>
+      <Main>{ renderEl(systemTags) }</Main>
     </Wrapper>
   )
 }
