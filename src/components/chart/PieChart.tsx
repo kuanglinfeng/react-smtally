@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactEcharts from 'echarts-for-react'
+import ReactEchartsCore from 'echarts-for-react/lib/core'
+import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/pie'
 
 type DataItem = {
@@ -27,7 +28,8 @@ const getOption = (props: PieChartProps) => {
 }
 
 export default (props: PieChartProps) => {
-  return <ReactEcharts
+  return <ReactEchartsCore
+    echarts={ echarts }
     theme="light"
     option={ getOption(props) as any }
     style={ { height: '200px', marginTop: '20px' } }

@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactEcharts from 'echarts-for-react'
+import ReactEchartsCore from 'echarts-for-react/lib/core'
+import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
 
@@ -72,7 +73,8 @@ const getOption = (props: LineChartProps) => {
 
 export default (props: LineChartProps) => {
   return (
-    <ReactEcharts
+    <ReactEchartsCore
+      echarts={ echarts }
       theme="light"
       option={ getOption(props) as any }
       style={ { height: '150px', marginTop: '20px' } }
