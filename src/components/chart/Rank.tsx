@@ -100,31 +100,23 @@ export default (props: Props) => {
   }
 
   const renderRank = (rankData: RankData) => {
-    const elements = []
-    for (const prop in rankData) {
-      if (rankData.hasOwnProperty(prop)) {
-        const tag = rankData[prop].tag
-        const amount = rankData[prop].amount
-        const percentage = rankData[prop].percentage
-        const count = rankData[prop].count
-        const element = <RankItem key={ tag.value } onClick={ () => onRankItemClick(tag) }>
-          <IconContainer backgroundColor={ `${ theme.tagColors[tag.value] }` }>
-            <Icon name={ `${ tag.value }` } />
+    return Object.values(rankData)
+      .sort((a, b) => b.amount - a.amount)
+      .map(data =>
+        <RankItem key={ data.tag.value } onClick={ () => onRankItemClick(data.tag) }>
+          <IconContainer backgroundColor={ `${ theme.tagColors[data.tag.value] }` }>
+            <Icon name={ `${ data.tag.value }` } />
           </IconContainer>
           <RankContent>
             <p>
-              <span>{ tag.title }</span>
-              <span>{ count }笔</span>
-              <span>{ (percentage * 100).toFixed(1) }%</span>
-              <span>{ amount }</span>
+              <span>{ data.tag.title }</span>
+              <span>{ data.count }笔</span>
+              <span>{ (data.percentage * 100).toFixed(1) }%</span>
+              <span>{ data.amount }</span>
             </p>
-            <ProportionBar percentage={ percentage } />
+            <ProportionBar percentage={ data.percentage } />
           </RankContent>
-        </RankItem>
-        elements.push(element)
-      }
-    }
-    return elements
+        </RankItem>)
   }
 
   return (
