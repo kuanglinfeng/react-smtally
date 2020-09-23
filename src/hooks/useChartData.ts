@@ -63,20 +63,8 @@ export default () => {
     return dataArray
   }
 
-  const getAverageAmountOfMonth = (year: number, month: number, type: AmountType) => {
-    const records = getAll()
-    let total = 0
-    const days = dayjs(year + '' + month ).daysInMonth()
-    records.forEach(record => {
-      const y = dayjs(record.date).year()
-      const m = dayjs(record.date).month() + 1
-      if (y === year && m === month && record.type === type) {
-        total += record.amount
-      }
-    })
-    return (total / days).toFixed(2)
-  }
 
 
-  return { getLineChartData, getPieChartData, getAverageAmountOfMonth }
+
+  return { getLineChartData, getPieChartData }
 }

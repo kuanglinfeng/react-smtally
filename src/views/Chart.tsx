@@ -34,8 +34,8 @@ export default function () {
   const [month, setMonth] = useState(dayjs().month() + 1)
   const [amountType, setAmountType] = useState<AmountType>('-')
   const [chartType, setChartType] = useState('流水')
-  const { getLineChartData, getPieChartData, getAverageAmountOfMonth } = useChartData()
-  const { getTotalAmountOfMonth } = useRecordsHandler()
+  const { getLineChartData, getPieChartData } = useChartData()
+  const { getTotalAmountOfMonth, getAverageAmountOfMonth, getRankData } = useRecordsHandler()
 
   const onMonthChange = (month: number) => {
     setMonth(month)
@@ -63,20 +63,24 @@ export default function () {
           onTypeSelect={ onAmountTypeSelect }
         />
         {
-          lineChartData.yData.length === 0 || pieChartData.length === 0 ? <NoData height={'40%'} /> :
+          lineChartData.yData.length === 0 || pieChartData.length === 0 ? <NoData height={ '40%' } /> :
             chartType === '流水' ?
-                <div>
-                  <LineChart
-                    xData={ lineChartData.xData }
-                    yData={ lineChartData.yData }
-                  />
-                  <Average>月平均支出：{getAverageAmountOfMonth(dayjs().year(), month, amountType)}</Average>
-                </div>
+              <div>
+                <LineChart
+                  xData={ lineChartData.xData }
+                  yData={ lineChartData.yData }
+                />
+                <Average>月平均{ amountType === '-' ? '支出' : '收入' }：{ getAverageAmountOfMonth(dayjs().year(), month, amountType) }</Average>
+                <Divide />
+                <Rank amountType={amountType} rankData={ getRankData(dayjs().year(), month, amountType) } />
+              </div>
               :
-            <PieChart data={ pieChartData } />
+              <div>
+                <PieChart data={ pieChartData } />
+                <Divide />
+                <Rank amountType={amountType} rankData={ getRankData(dayjs().year(), month, amountType) } />
+              </div>
         }
-        <Divide />
-        <Rank />
       </Wrapper>
     </Layout>
   )

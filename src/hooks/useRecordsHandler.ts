@@ -2,6 +2,16 @@ import { RecordItem } from 'components/bill/Main'
 import dayjs from 'dayjs'
 import useRecords from 'hooks/useRecords'
 
+export type RankData = {
+  // key is tagValue
+  [key: string]: {
+    tag: TagItem
+    count: number
+    amount: number
+    percentage: number
+  }
+}
+
 export default () => {
 
   const {getAll} = useRecords()
@@ -59,5 +69,46 @@ export default () => {
     return {outlay, income}
   }
 
-  return {mapRecordsByDate, filterRecordsByYearAndMonth, getTotalAmountOfMonth}
+  const getAverageAmountOfMonth = (year: number, month: number, type: AmountType) => {
+    const days = dayjs(year + '' + month ).daysInMonth()
+    const totalAmount = getTotalAmountOfMonth(year, month)
+    if (type === '+')
+      return (totalAmount.income / days).toFixed(2)
+    else
+      return (totalAmount.outlay / days).toFixed(2)
+  }
+
+  // dataItem => tagValue: {tag, recordsCount, amount, percentage}
+  const getRankData = (year: number, month: number, type: AmountType): RankData => {
+    const records = getAll()
+    const data: RankData = {}
+    const totalAmountOfMonth = getTotalAmountOfMonth(year, month)
+    let totalAmount = 0
+    if (type === '+')
+      totalAmount = totalAmountOfMonth.income
+    else
+      totalAmount = totalAmountOfMonth.outlay
+    records.forEach(record => {
+      const y = dayjs(record.date).year()
+      const m = dayjs(record.date).month() + 1
+      if (y === year && m === month && record.type === type) {
+        const tagValue = record.tag.value
+        if (!data[tagValue]) {
+          data[tagValue] = {tag: record.tag, amount: record.amount, count: 1, percentage: record.amount / totalAmount}
+        } else {
+          const previousData = data[tagValue]
+          data[tagValue] = {tag: record.tag, amount: previousData.amount + record.amount, count: previousData.count + 1, percentage: (previousData.amount + record.amount) / totalAmount}
+        }
+      }
+    })
+    return data
+  }
+
+  return {
+    mapRecordsByDate,
+    filterRecordsByYearAndMonth,
+    getTotalAmountOfMonth,
+    getAverageAmountOfMonth,
+    getRankData
+  }
 }

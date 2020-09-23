@@ -2,15 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconWrapper } from 'components/add/UserTags'
 import Icon from 'components/Icon'
+import { RankData } from 'hooks/useRecordsHandler'
+import theme from 'theme'
 
 const Wrapper = styled.div`
-  padding: 5px 8px;
+  padding: 5px 0;
   flex-grow: 234;
   overflow: auto;
 `
 
 const Title = styled.div`
   margin: 5px 0;
+  padding: 0 8px;
   font-size: 12px;
   color: #757575;
 `
@@ -20,9 +23,8 @@ const RankList = styled.ul`
 `
 
 const RankItem = styled.li`
-  padding: 8px 0;
+  padding: 8px;
   display:flex;
-  border-radius: 4px;
   &:active {
     background: #E0E0E0;
   }
@@ -31,7 +33,7 @@ const RankItem = styled.li`
 const IconContainer = styled(IconWrapper)`
    margin: 0;
    padding: 0;
-   background: ${(props: IconWrapperProps) => props.backgroundColor};
+   background: ${ (props: IconWrapperProps) => props.backgroundColor };
    width: 30px; height: 30px;
   .icon {
     fill: #fff;
@@ -77,30 +79,50 @@ const ProportionBar = styled.div`
     height: 4px;
     border-radius: 2px;
     background: #D47B81;
-    width: ${(props: ProportionBarProps) => props.percentage * 100 + '%'};
+    width: ${ (props: ProportionBarProps) => props.percentage * 100 + '%' };
   }
 `
 
-export default () => {
+type Props = {
+  amountType: AmountType
+  rankData: RankData
+}
 
-  return (
-    <Wrapper>
-      <Title>支出排行榜</Title>
-      <RankList>
-        <RankItem>
-          <IconContainer backgroundColor="#55C6B2">
-            <Icon name="game" />
+export default (props: Props) => {
+
+  const renderRank = (rankData: RankData) => {
+    const elements = []
+    for (const prop in rankData) {
+      if (rankData.hasOwnProperty(prop)) {
+        const tag = rankData[prop].tag
+        const amount = rankData[prop].amount
+        const percentage = rankData[prop].percentage
+        const count = rankData[prop].count
+        const element = <RankItem key={ tag.value }>
+          <IconContainer backgroundColor={ `${ theme.tagColors[tag.value] }` }>
+            <Icon name={ `${ tag.value }` } />
           </IconContainer>
           <RankContent>
             <p>
-              <span>游戏</span>
-              <span>2笔</span>
-              <span>56.4%</span>
-              <span>150</span>
+              <span>{ tag.title }</span>
+              <span>{ count }笔</span>
+              <span>{ (percentage * 100).toFixed(1) }%</span>
+              <span>{ amount }</span>
             </p>
-            <ProportionBar percentage={0.2} />
+            <ProportionBar percentage={ percentage } />
           </RankContent>
         </RankItem>
+        elements.push(element)
+      }
+    }
+    return elements
+  }
+
+  return (
+    <Wrapper>
+      <Title>{ props.amountType === '+' ? '收入' : '支出' }排行榜</Title>
+      <RankList>
+        { renderRank(props.rankData) }
       </RankList>
     </Wrapper>
   )
