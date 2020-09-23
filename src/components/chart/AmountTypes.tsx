@@ -36,14 +36,12 @@ const Income = styled.div`
   > .circle {
     border-color: green;
     &.active {
-      background: ${theme.color};
+      background: ${ theme.color };
     }
   }
 `
 
-export
-
-type AmountTypeProps = {
+export type AmountTypeProps = {
   outlayAmount: number
   incomeAmount: number
   onTypeSelect: (type: AmountType) => void
@@ -73,17 +71,17 @@ export default (props: AmountTypeProps) => {
     <Wrapper>
       <Outlay>
         <div
-          className={`circle ${amountType === '-' ? 'active' : ''}`}
-          onClick={onOutlaySelect}
+          className={ `circle ${ amountType === '-' ? 'active' : '' }` }
+          onClick={ onOutlaySelect }
         />
-        <span>支出:{props.outlayAmount.toFixed(2)}</span>
+        <span>支出:{ props.outlayAmount.toFixed(2) }</span>
       </Outlay>
       <Income>
         <div
-          className={`circle ${amountType === '+' ? 'active' : ''}`}
-          onClick={onIncomeSelect}
+          className={ `circle ${ amountType === '+' ? 'active' : '' }` }
+          onClick={ onIncomeSelect }
         />
-        <span>收入:{props.incomeAmount.toFixed(2)}</span>
+        <span>收入:{ props.incomeAmount.toFixed(2) }</span>
       </Income>
     </Wrapper>
   )

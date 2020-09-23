@@ -1,7 +1,7 @@
 import React from 'react'
+import ReactEcharts from 'echarts-for-react'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
-import ReactEcharts from 'echarts-for-react'
 
 type LineChartProps = {
   xData: string[]

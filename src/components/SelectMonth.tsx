@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Picker } from 'antd-mobile'
-import getPickerMonths from 'constants/getPickerMonths'
 import Icon from 'components/Icon'
+import getPickerMonths from 'constants/getPickerMonths'
 
 type Props = {
   month: number
@@ -26,7 +26,7 @@ export default (props: Props) => {
       value={ [month.toString()] }
       onChange={ onPickerChange }
     >
-      <div className={props.className}>
+      <div className={ props.className }>
         <span>{ month }</span>
         <div>月<Icon name="down" /></div>
       </div>

@@ -11,7 +11,7 @@ export const IconWrapper = styled.div`
   justify-content: center;
   height: 35px; width: 35px;  
   border-radius: 50%;
-  background: ${(props: IconWrapperProps) => props.backgroundColor};
+  background: ${ (props: IconWrapperProps) => props.backgroundColor };
   .icon {
     width: 25px;  height: 25px;
     fill: #fff;

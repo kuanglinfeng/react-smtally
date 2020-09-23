@@ -12,7 +12,7 @@ const Nav = styled.nav`
     > li {
       width: 33.333333%;
       &.add {
-        .icon {fill: ${theme.color};}
+        .icon {fill: ${ theme.color };}
       }
       > a {
         display:flex;
@@ -25,7 +25,7 @@ const Nav = styled.nav`
          height: 32px; width: 32px;
         }
         &.active {
-          > .icon {fill: ${theme.color};}
+          > .icon {fill: ${ theme.color };}
         }
       }
     }

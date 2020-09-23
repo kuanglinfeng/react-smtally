@@ -6,7 +6,7 @@ const Header = styled.header`
   display:flex;
   justify-content: space-between;
   align-items: center;
-  background: ${theme.color};
+  background: ${ theme.color };
   font-size: 14px;
   .icon {
     width: 30px;  height: 30px;

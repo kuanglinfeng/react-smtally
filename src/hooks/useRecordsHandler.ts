@@ -16,40 +16,26 @@ export default () => {
   const { getAll } = useRecords()
 
   const mapRecordsByDate = (amountType?: AmountType, tag?: TagItem) => {
-    const records = getAll()
+    let records = getAll()
     records.sort((a: RecordItem, b: RecordItem) => {
       let aTime = new Date(a.date).getTime()
       let bTime = new Date(b.date).getTime()
       return bTime - aTime
     })
     const map: any = {}
-    if (!amountType && !tag) {
-      records.forEach(record => {
-        const y = dayjs(record.date).year()
-        const m = dayjs(record.date).month() + 1
-        const d = dayjs(record.date).date()
-        if (!map[`${ y }-${ m }-${ d }`]) {
-          map[`${ y }-${ m }-${ d }`] = [record]
-        } else {
-          map[`${ y }-${ m }-${ d }`].push(record)
-        }
-      })
-    }
     if (amountType && tag) {
-      records.forEach(record => {
-        if (record.type === amountType && record.tag.value === tag.value) {
-          const y = dayjs(record.date).year()
-          const m = dayjs(record.date).month() + 1
-          const d = dayjs(record.date).date()
-          if (!map[`${ y }-${ m }-${ d }`]) {
-            map[`${ y }-${ m }-${ d }`] = [record]
-          } else {
-            map[`${ y }-${ m }-${ d }`].push(record)
-          }
-        }
-      })
+      records = records.filter(record => record.type === amountType && record.tag.value === tag.value)
     }
-
+    records.forEach(record => {
+      const y = dayjs(record.date).year()
+      const m = dayjs(record.date).month() + 1
+      const d = dayjs(record.date).date()
+      if (!map[`${ y }-${ m }-${ d }`]) {
+        map[`${ y }-${ m }-${ d }`] = [record]
+      } else {
+        map[`${ y }-${ m }-${ d }`].push(record)
+      }
+    })
     return map
   }
 
@@ -67,7 +53,6 @@ export default () => {
     }
     return map
   }
-
 
   const getTotalAmountOfMonth = (year: number, month: number) => {
     const records = getAll()

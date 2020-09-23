@@ -11,11 +11,11 @@ const Wrapper = styled.div`
   justify-content: center;
   > div {
     width: 40%;
-    border: 1px solid ${theme.color};
+    border: 1px solid ${ theme.color };
     background: #fff;
     > button {
        padding: 0;
-       color: ${theme.color};
+       color: ${ theme.color };
        &.active {
         background: ${ theme.color };
         color: #fff;
@@ -33,7 +33,7 @@ export default (props: ChartTypeProps) => {
 
   return (
     <Wrapper>
-      <RadioMenu values={props.values} onSelect={props.onSelect} />
+      <RadioMenu values={ props.values } onSelect={ props.onSelect } />
     </Wrapper>
   )
 }

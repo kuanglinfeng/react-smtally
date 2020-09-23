@@ -1,6 +1,6 @@
 import React from 'react'
-import 'echarts/lib/chart/pie'
 import ReactEcharts from 'echarts-for-react'
+import 'echarts/lib/chart/pie'
 
 type DataItem = {
   name: string

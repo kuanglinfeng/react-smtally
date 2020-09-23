@@ -53,9 +53,8 @@ export default (props: Props) => {
   return (
     <Wrapper>
       <Title>备注：</Title>
-      <Input onChange={inputChange} value={value} onClick={ handleInputClick(value) }
+      <Input onChange={ inputChange } value={ value } onClick={ handleInputClick(value) }
       />
     </Wrapper>
-
   )
 }

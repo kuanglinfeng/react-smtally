@@ -1,6 +1,6 @@
 import React, { Props } from 'react'
-import Nav from './Nav'
 import styled from 'styled-components'
+import Nav from 'components/Nav'
 
 const Wrapper = styled.div`
   display:flex;

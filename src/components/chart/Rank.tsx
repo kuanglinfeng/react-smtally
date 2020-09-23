@@ -1,10 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { IconWrapper } from 'components/add/UserTags'
 import Icon from 'components/Icon'
 import { RankData } from 'hooks/useRecordsHandler'
 import theme from 'theme'
-import { useHistory } from 'react-router-dom'
 
 const Wrapper = styled.div`
   padding: 5px 0;
@@ -96,7 +96,7 @@ export default (props: Props) => {
   const history = useHistory()
 
   const onRankItemClick = (tag: TagItem) => {
-    history.push(`/rankDetail?title=${tag.title}&value=${tag.value}&year=${props.year}&month=${props.month}&amountType=${encodeURIComponent(props.amountType)}`)
+    history.push(`/rankDetail?title=${ tag.title }&value=${ tag.value }&year=${ props.year }&month=${ props.month }&amountType=${ encodeURIComponent(props.amountType) }`)
   }
 
   const renderRank = (rankData: RankData) => {
@@ -107,7 +107,7 @@ export default (props: Props) => {
         const amount = rankData[prop].amount
         const percentage = rankData[prop].percentage
         const count = rankData[prop].count
-        const element = <RankItem key={ tag.value } onClick={() => onRankItemClick(tag)}>
+        const element = <RankItem key={ tag.value } onClick={ () => onRankItemClick(tag) }>
           <IconContainer backgroundColor={ `${ theme.tagColors[tag.value] }` }>
             <Icon name={ `${ tag.value }` } />
           </IconContainer>

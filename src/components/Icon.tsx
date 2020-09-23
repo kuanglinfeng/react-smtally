@@ -14,7 +14,7 @@ type Props = {
 
 function Icon(props: Props) {
   return (
-    <svg className='icon' onClick={props.onClick}>
+    <svg className='icon' onClick={ props.onClick }>
       <use xlinkHref={ '#' + props.name } />
     </svg>
   )

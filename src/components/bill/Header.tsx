@@ -66,16 +66,16 @@ export default (props: Props) => {
     <Wrapper>
       <Date>
         <span>{ props.year }年</span>
-        <SelectMonth month={month} onMonthChange={onMonthChange} />
+        <SelectMonth month={ month } onMonthChange={ onMonthChange } />
       </Date>
       <Total>
         <div>
           <span>收入</span>
-          <div>{props.income.toFixed(2)}</div>
+          <div>{ props.income.toFixed(2) }</div>
         </div>
         <div>
           <span>支出</span>
-          <div>{props.outlay.toFixed(2)}</div>
+          <div>{ props.outlay.toFixed(2) }</div>
         </div>
       </Total>
     </Wrapper>

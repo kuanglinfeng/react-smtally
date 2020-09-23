@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { userIncomeTags, userOutlayTags } from 'constants/userDefaultTags'
-import Icon from 'components/Icon'
-import useUserTags from 'hooks/useUserTags'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+import Icon from 'components/Icon'
+import { userIncomeTags, userOutlayTags } from 'constants/userDefaultTags'
+import useUserTags from 'hooks/useUserTags'
 import theme from 'theme'
 
 const Wrapper = styled.div`
@@ -42,7 +42,7 @@ export const IconWrapper = styled.div`
   border-radius: 50%;
   margin-bottom: 10px;
   &.active {
-    background: ${(props: IconWrapperProps) => props.backgroundColor};
+    background: ${ (props: IconWrapperProps) => props.backgroundColor };
     > .icon {
       fill: #fff;
     }
@@ -71,7 +71,7 @@ export default (props: Props) => {
 
   const [userTags, setUserTags] = useState<TagItem[]>([])
   const [selectedTag, setSelectedTag] = useState()
-  const {get, set} = useUserTags(props.type === '-' ? 'userOutlayTags' : 'userIncomeTags')
+  const { get, set } = useUserTags(props.type === '-' ? 'userOutlayTags' : 'userIncomeTags')
 
   const history = useHistory()
 
@@ -101,7 +101,7 @@ export default (props: Props) => {
       setSelectedTag(tag)
       props.onSelect(tag)
     } else {
-      history.push(`/tags?type=${encodeURIComponent(props.type)}` )
+      history.push(`/tags?type=${ encodeURIComponent(props.type) }`)
     }
   }
 
@@ -110,11 +110,14 @@ export default (props: Props) => {
       <Tags>
         {
           userTags.map(tag => {
-            return (<TagItem key={tag.value} onClick={() => onTagClick(tag)}>
-              <IconWrapper backgroundColor={theme.tagColors[tag.value]} className={`${selectedTag.value === tag.value ? 'active': ''} ${tag.value === 'define' ? 'define': ''}`}>
-                <Icon name={tag.value} />
+            return (<TagItem key={ tag.value } onClick={ () => onTagClick(tag) }>
+              <IconWrapper
+                backgroundColor={ theme.tagColors[tag.value] }
+                className={ `${ selectedTag.value === tag.value ? 'active' : '' } ${ tag.value === 'define' ? 'define' : '' }` }
+              >
+                <Icon name={ tag.value } />
               </IconWrapper>
-              <Title>{tag.title}</Title>
+              <Title>{ tag.title }</Title>
             </TagItem>)
           })
         }
