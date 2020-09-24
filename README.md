@@ -10,5 +10,3 @@
 - TypeScript
 - react-router
 - styled-components
-
-长按某条记录：action-sheet

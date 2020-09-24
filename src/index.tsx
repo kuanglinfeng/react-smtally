@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom'
 import App from 'App'
 import 'index.css'
 
-// 解决键盘弹起导致影响布局的问题
-//获取当前页面高度
-// const pageHeight = document.body.clientHeight
-// document.body.onresize = function () {
-//   const currentHeight = document.body.clientHeight
-//   if (pageHeight - currentHeight > 50) {
-//     document.body.style.height = pageHeight + 'px'
-//   } else {
-//     document.body.style.height = "100vh"
-//   }
-// }
-
 ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
+
+if (document.documentElement.clientWidth > 500) {
+  window.alert('请使用手机代开本页面，以保证浏览效果')
+  const img = document.createElement('img')
+  img.src = 'qrcode.png'
+  img.style.position = 'fixed'
+  img.style.left = '50%'
+  img.style.top = '50%'
+  img.style.transform = 'translate(-50%, -50%)'
+  img.style.boxShadow = '0 0 10px rgba(0, 0, 0, .25)'
+  document.body.appendChild(img)
+}
