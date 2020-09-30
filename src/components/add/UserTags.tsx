@@ -76,7 +76,12 @@ export default (props: Props) => {
   const history = useHistory()
 
   useEffect(() => {
-    const tags = props.type === '-' ? userOutlayTags : userIncomeTags
+    let tags: TagItem[] = []
+    if (get().length === 0) {
+      tags = props.type === '-' ? userOutlayTags : userIncomeTags
+    } else {
+      tags = get()
+    }
     // 没有传入默认选中的tag 则默认选中选对应类型tag列表的第一个
     if (!props.defaultTag) {
       setSelectedTag(tags[0])
