@@ -16,10 +16,11 @@ const Wrapper = styled.div`
 `
 
 const IconBorder = styled(IconWrapper)`
+  background: #fff;
   &.selected {
-     background: ${ (props: IconWrapperProps) => props.backgroundColor };
+    border: 1px solid ${theme.color};
     .icon {
-      fill: #fff;
+      fill: ${theme.color};
     }
   }
 `

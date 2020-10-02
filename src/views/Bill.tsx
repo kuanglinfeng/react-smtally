@@ -78,7 +78,6 @@ export default () => {
   const { remove } = useRecords()
   const [year] = useState(dayjs().year())
   const [month, setMonth] = useState(dayjs().month() + 1)
-  const refreshPage = useState({})[1]
   const { filterRecordsByYearAndMonth, getTotalAmountOfMonth } = useRecordsHandler()
   const [recordsMap, setRecordsMap] = useState(filterRecordsByYearAndMonth(year, month))
   const history = useHistory()
@@ -95,7 +94,7 @@ export default () => {
         history.push(`/add?id=${ id }`)
       } else if (buttonIndex === 1) {
         remove(id)
-        refreshPage({})
+        setRecordsMap(filterRecordsByYearAndMonth(year, month))
       }
     })
   }
