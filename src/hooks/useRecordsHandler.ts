@@ -45,7 +45,7 @@ export default () => {
     for (const prop in dateMap) {
       if (dateMap.hasOwnProperty(prop)) {
         const y = parseInt(prop.split('-')[0])
-        const m = parseInt(prop.split('-')[1])
+        const m = parseInt(prop.split('-')[1]) + 1
         if (year === y && month === m) {
           map[prop] = dateMap[prop]
         }

@@ -79,8 +79,9 @@ export default () => {
   const [year] = useState(dayjs().year())
   const [month, setMonth] = useState(dayjs().month() + 1)
   const refreshPage = useState({})[1]
-  const history = useHistory()
   const { filterRecordsByYearAndMonth, getTotalAmountOfMonth } = useRecordsHandler()
+  const [recordsMap, setRecordsMap] = useState(filterRecordsByYearAndMonth(year, month))
+  const history = useHistory()
 
   const showActionSheet = (id: string) => {
     const buttons = ['编辑', '删除', '取消']
@@ -100,7 +101,11 @@ export default () => {
   }
 
   const onMonthChange = (m: number) => setMonth(m)
-  const recordsMap = filterRecordsByYearAndMonth(year, month)
+
+  React.useEffect(() => {
+    setRecordsMap(filterRecordsByYearAndMonth(year, month))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [year, month])
 
   return (
     <Layout>
