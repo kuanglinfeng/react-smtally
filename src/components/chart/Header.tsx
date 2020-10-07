@@ -6,7 +6,7 @@ import SelectMonth from 'components/SelectMonth'
 import theme from 'theme'
 
 export const Header = styled.div`
-  padding: 8px 0;
+  padding: 8px 12px;
   display:flex;
   justify-content: space-between;
   .icon {

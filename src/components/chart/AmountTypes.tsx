@@ -58,11 +58,13 @@ export default (props: AmountTypeProps) => {
   }, [])
 
   const onOutlaySelect = () => {
+    if (amountType === '-') return
     setAmountType('-')
     props.onTypeSelect('-')
   }
 
   const onIncomeSelect = () => {
+    if (amountType === '+') return
     setAmountType('+')
     props.onTypeSelect('+')
   }
